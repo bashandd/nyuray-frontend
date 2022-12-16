@@ -1,0 +1,27 @@
+{
+  "Location": [
+    { "label": "Hyderabad", "value": "Hyderabad" },
+    { "label": "Bangalore", "value": "Bangalore" },
+    { "label": "Pune", "value": "Pune" },
+    { "label": "Chennai", "value": "Chennai" },
+    { "label": "Noida", "value": "Noida" },
+    { "label": "Gurgaon", "value": "Gurgaon" },
+    { "label": "Others", "value": "Others" }
+  ],
+  "Qualification": [
+    { "label": "B.Tech", "value": "B.Tech" },
+    { "label": "M.Tech", "value": "M.Tech" },
+    { "label": "MCA", "value": "MCA" },
+    { "label": "B.Sc", "value": "B.Sc" },
+    { "label": "MS", "value": "MS" },
+    { "label": "Others", "value": "Others" }
+  ],
+  "NoticePeriod": [
+    { "label": "Immediate", "value": "Immediate" },
+    { "label": "1 week", "value": "1 week" },
+    { "label": "2 weeks", "value": "2 weeks" },
+    { "label": "1 Month", "value": "1 Month" },
+    { "label": "2 Months", "value": "2 Months" },
+    { "label": "3 Months", "value": "3 Months" }
+  ]
+}

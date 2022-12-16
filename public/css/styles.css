@@ -1,0 +1,53 @@
+.active {
+  color: #1890ff !important;
+  text-decoration: underline;
+}
+
+.ant-form-item-label>label {
+  font-size: 16px;
+}
+
+.ant-table-cell {
+  font-size: 16px;
+}
+
+#components-table-demo-resizable-column .react-resizable {
+  position: relative;
+  background-clip: padding-box;
+}
+
+#components-table-demo-resizable-column .react-resizable-handle {
+  position: absolute;
+  right: -5px;
+  bottom: 0;
+  z-index: 1;
+  width: 10px;
+  height: 100%;
+  cursor: col-resize;
+}
+
+.active {
+  color: #1890ff !important;
+  text-decoration: underline;
+}
+.ProseMirror {
+  height: 500px;
+  padding: 15px 25px;
+  overflow: scroll;
+}
+
+.ant-upload-list-item-card-actions {
+  display: none;
+}
+.ant-upload-drag {
+  height: 150px !important;
+}
+
+/* 
+.ant-select-selection-item, .ant-layout-sider-children {
+  font-size: 16px;
+}
+
+.ant-layout-sider-children, .ant-layout-sider {
+  background-color: white;
+} */
