@@ -68,11 +68,11 @@ const TopNav = () => {
           <a>Home</a>
         </Link>
       </Menu.Item>
-      <Menu.Item key="reqs" icon={<OrderedListOutlined />}>
-        <Link href="/reqs/reqs">
+      {/* <Menu.Item key="reqs" icon={<OrderedListOutlined />}>
+        <Link href="/reqs">
           <a>Requirements</a>
         </Link>
-      </Menu.Item>
+      </Menu.Item> */}
 
       {auth?.user === null && (
         <>

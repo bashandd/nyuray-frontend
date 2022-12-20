@@ -148,12 +148,12 @@ function Skills() {
             )}
           ></List>
         </Col>
-        <SkillUpdateModal
+        {/* <SkillUpdateModal
           openModal={openModal}
           setOpenModal={setOpenModal}
           handleUpdate={handleUpdate}
           updatingSkill={updatingSkill}
-        />
+        /> */}
       </Row>
     </AdminLayout>
   );
