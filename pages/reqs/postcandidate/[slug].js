@@ -247,7 +247,7 @@ export const PostCandidate = () => {
     return () => clearTimeout(delayDebounceFn);
   }, [requirement, candidateList]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     loadRequirement();
   }, [router?.query?.slug]);
 
