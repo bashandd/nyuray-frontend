@@ -1,6 +1,6 @@
 import { Layout } from "antd";
 import { useContext, useEffect, useState } from "react";
-//import AdminNav from "../nav/AdminNav";
+import GuestNav from "../nav/GuestNav";
 import { AuthContext } from "../../context/auth";
 import { useRouter } from "next/router";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -49,9 +49,13 @@ function GuestLayout({ children }) {
 
   return (
     <Layout>
-      <h1> All Guests are welcome here..</h1>
+      <GuestNav />
+      <Layout>
+        <Content style={{ padding: "10px" }}>{children}</Content>
+      </Layout>
     </Layout>
   );
+
 }
 
 export default GuestLayout;
