@@ -9,7 +9,7 @@ function Profile() {
   let userInfo = "";
 
   function getUser() {
-    userInfo = JSON.parse(localStorage.getItem("auth"));
+    userInfo = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("auth")): null;
 
     if (userInfo) {
       return userInfo.user;
