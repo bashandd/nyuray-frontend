@@ -19,7 +19,7 @@ function Profile() {
   }
 
   userInfo = getUser();
-
+if (userInfo){
   return (
     <MainLayout>
      
@@ -38,6 +38,8 @@ function Profile() {
 
     </MainLayout>
   );
+}
+  
 }
 
 export default Profile;
