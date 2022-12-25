@@ -64,8 +64,8 @@ const GuestNav = () => {
 
         {/* profile */}
         <Menu.Item key="2" icon={<UserOutlined />}>
-          <Link href="/profile">
-            <a className={activeName("/profile")}>Profile</a>
+          <Link href="/guest/profile">
+            <a className={activeName("/guest/profile")}>Profile</a>
           </Link>
         </Menu.Item>
       </Menu>

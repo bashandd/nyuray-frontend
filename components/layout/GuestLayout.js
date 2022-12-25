@@ -49,7 +49,7 @@ function GuestLayout({ children }) {
 
   return (
     <Layout>
-      <AdminNav />
+      <GuestNav />
       <Layout>
         <Content style={{ padding: "10px" }}>{children}</Content>
       </Layout>

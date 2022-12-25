@@ -1,8 +1,8 @@
-import MainLayout from "../../components/layout/MainLayout";
+import GuestLayout from "../../components/layout/GuestLayout";
 
 function Guest() {
   return (
-    <MainLayout>
+    <GuestLayout>
       {/* <h1 style={{ paddingTop: "20px", paddingLeft: "200px" }}>
        Logged In as Guest.
       </h1>
@@ -15,7 +15,7 @@ Your Email is not verified yet. Please contact Admin</h1>
 
 </div>
       
-    </MainLayout>
+    </GuestLayout>
   );
 }
 
