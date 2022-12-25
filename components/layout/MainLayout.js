@@ -1,6 +1,6 @@
 import { Layout } from "antd";
 import { useContext, useEffect, useState } from "react";
-import AdminNav from "../nav/AdminNav";
+import MainNav from "../nav/MainNav";
 import { AuthContext } from "../../context/auth";
 import { useRouter } from "next/router";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -8,7 +8,7 @@ import axios from "axios";
 
 const { Content } = Layout;
 
-function AdminLayout({ children }) {
+function MainLayout({ children }) {
   //context
   const [auth, setAuth] = useContext(AuthContext);
   //state
@@ -23,14 +23,25 @@ function AdminLayout({ children }) {
     //   setLoading(false);
     // }
     if (auth?.token) {
-      getCurrentAdmin();
+      getCurrentUser();
     }
   }, [auth?.token]);
 
-  const getCurrentAdmin = async () => {
+  const getCurrentUser = async () => {
+    //console.log ("getCurrentAdmin");
     try {
-      const { data } = await axios.get("/current-admin");
-      setLoading(false);
+      const auth = JSON.parse(localStorage.getItem("auth"));
+      // console.log ("user",auth.user );
+      // const userId = auth.user._id;
+      // console.log ("id",userId );
+      // const { data } = await axios.get("/current-user", {
+      //   _id: auth.user._id,
+      // });
+      // console.log ("data", data);
+      if (auth.user.role !== "Guest"){
+        setLoading(false);
+      }
+      
       // console.log (data);
       // console.log (data.err);
     } catch (err) {
@@ -56,7 +67,7 @@ function AdminLayout({ children }) {
 
   return (
     <Layout>
-      <AdminNav />
+      <MainNav />
       <Layout>
         <Content style={{ padding: "10px" }}>{children}</Content>
       </Layout>
@@ -64,4 +75,4 @@ function AdminLayout({ children }) {
   );
 }
 
-export default AdminLayout;
+export default MainLayout;

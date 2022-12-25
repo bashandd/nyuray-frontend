@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import AdminLayout from "../../components/layout/AdminLayout";
+import MainLayout from "../../components/layout/MainLayout";
 import UserUpdateModal from "../../components/modal/UserUpdateModal";
 // import UserVerifyModal from "../../components/modal/UserVerifyModal";
 import { Layout } from "antd";
@@ -172,7 +172,7 @@ function Users() {
   };
 
   return (
-    <AdminLayout>
+    <MainLayout>
       <Table
         columns={columns}
         rowKey="name"
@@ -200,7 +200,7 @@ function Users() {
         updatingUser={updatingUser}
         allUsers={allUsers}
       />
-    </AdminLayout>
+    </MainLayout>
   );
 }
 

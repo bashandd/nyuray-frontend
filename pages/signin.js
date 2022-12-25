@@ -39,6 +39,8 @@ function Signin() {
         // redirect user
         if (data?.user?.role === "Admin") {
           router.push("/admin");
+        } else if (data?.user?.role === "Recruiter") {
+          router.push("/recruiter");
         } else if (data?.user?.role === "SPoC") {
           router.push("/spoc");
         } else if (data?.user?.role === "Vendor") {

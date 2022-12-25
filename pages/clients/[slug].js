@@ -18,7 +18,7 @@ import {
     Space,
     InputNumber,
   } from "antd";
-  import AdminLayout from "../../components/layout/AdminLayout";
+  import MainLayout from "../../components/layout/MainLayout";
   import { ThemeContext } from "../../context/theme";
   import axios from "axios";
   import { useRouter } from "next/router";
@@ -186,7 +186,7 @@ import {
   
   
     return (
-      <AdminLayout>
+      <MainLayout>
         {loading ? (
           <div> Loading ...</div>
         ) : (
@@ -513,7 +513,7 @@ import {
         )}
   
         <div></div>
-      </AdminLayout>
+      </MainLayout>
     );
   }
   

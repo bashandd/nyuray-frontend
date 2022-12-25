@@ -1,15 +1,15 @@
 import { Layout } from "antd";
-import MainLayout from "../../components/layout/MainLayout";
+import MainLayout from "../components/layout/MainLayout";
 const { Content, Sider } = Layout;
 
-function Admin() {
+function Dashboard() {
   return (
   <MainLayout> 
   <h1 style={{paddingTop:"20px", paddingLeft:"40px"}}>
-    This is Admin page. Super User.
+    This is Dashboard page.
   </h1>
   </MainLayout>
   );
 }
 
-export default Admin;
+export default Dashboard;

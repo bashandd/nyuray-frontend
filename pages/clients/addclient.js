@@ -12,7 +12,7 @@ import {
   Space,
   InputNumber,
 } from "antd";
-import AdminLayout from "../../components/layout/AdminLayout";
+import MainLayout from "../../components/layout/MainLayout";
 import { ThemeContext } from "../../context/theme";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -184,7 +184,7 @@ function NewClient() {
 
 
   return (
-    <AdminLayout>
+    <MainLayout>
       <Form
         {...formItemLayout}
         form={form}
@@ -735,7 +735,7 @@ function NewClient() {
        
         </Row>
       </Form>
-    </AdminLayout>
+    </MainLayout>
   );
 }
 

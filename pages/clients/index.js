@@ -1,4 +1,4 @@
-import AdminLayout from "../../components/layout/AdminLayout";
+import MainLayout from "../../components/layout/MainLayout";
 import { Row, Col, Button, Divider } from "antd";
 import { Space, Table, Tag } from "antd";
 import Link from "next/link";
@@ -135,7 +135,7 @@ function Clients() {
   };
 
   return (
-    <AdminLayout>
+    <MainLayout>
       <Row justify="end" style={{ marginTop: "10px" }}>
         <Col span={4}>
           <Button type="primary">
@@ -166,7 +166,7 @@ function Clients() {
         }}
         dataSource={clients}
       />
-    </AdminLayout>
+    </MainLayout>
   );
 }
 

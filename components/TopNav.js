@@ -45,6 +45,8 @@ const TopNav = () => {
   const roleBasedLink = () => {
     if (auth?.user?.role === "Admin") {
       return "/admin";
+    } else if (auth?.user?.role === "Recruiter") {
+      return "/recruiter";
     } else if (auth?.user?.role === "SPoC") {
       return "/spoc";
     } else if (auth?.user?.role === "Vendor") {

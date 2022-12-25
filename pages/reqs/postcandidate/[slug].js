@@ -40,7 +40,7 @@ import {
 } from "@ant-design/icons";
 import Media from "../../../components/media";
 import { MediaContext } from "../../../context/media";
-import AdminLayout from "../../../components/layout/AdminLayout";
+import MainLayout from "../../../components/layout/MainLayout";
 import configData from "../../../config/config.json";
 
 const { Meta } = Card;
@@ -304,7 +304,7 @@ export const PostCandidate = () => {
   };
 
   return (
-    <AdminLayout>
+    <MainLayout>
       <Row justify="end" style={{ marginTop: "10px" }}>
         <Col span={4}>
           <Button type="primary">
@@ -1030,7 +1030,7 @@ export const PostCandidate = () => {
 
         </Form>
       )}
-    </AdminLayout>
+    </MainLayout>
   );
 };
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Layout } from "antd";
-import AdminLayout from "../../components/layout/AdminLayout";
+import MainLayout from "../../components/layout/MainLayout";
 import { Form, Input, Row, Col, Button, List } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import axios from "axios";
@@ -71,7 +71,7 @@ function Vendors() {
   };
 
   return (
-    <AdminLayout>
+    <MainLayout>
       <Row>
         {/* first column  screen size => xs=extra small sm-small, lg=large */}
 
@@ -130,7 +130,7 @@ function Vendors() {
           ></List>
         </Col>
       </Row>
-    </AdminLayout>
+    </MainLayout>
   );
 }
 

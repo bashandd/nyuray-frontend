@@ -1,6 +1,6 @@
 import { Layout } from "antd";
 import { useContext, useEffect, useState } from "react";
-import GuestNav from "../nav/GuestNav";
+import RecruiterNav from "../nav/RecruiterNav";
 import { AuthContext } from "../../context/auth";
 import { useRouter } from "next/router";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -8,7 +8,7 @@ import axios from "axios";
 
 const { Content } = Layout;
 
-function GuestLayout({ children }) {
+function RecruiterLayout({ children }) {
   //context
   const [auth, setAuth] = useContext(AuthContext);
   //state
@@ -17,15 +17,22 @@ function GuestLayout({ children }) {
   const router = useRouter();
 
   useEffect(() => {
-    getCurrentGuest();
+    // if (auth?.user?.role !== "Admin") {
+    //   router.push("/");
+    // } else {
+    //   setLoading(false);
+    // }
+    if (auth?.token) {
+      getCurrentRecruiter();
+    }
   }, [auth?.token]);
 
-  const getCurrentGuest = async () => {
+  const getCurrentRecruiter = async () => {
     try {
-      const { data } = await axios.get("/current-guest");
+      const { data } = await axios.get("/current-recruiter");
       setLoading(false);
-      console.log(data);
-      console.log(data.err);
+      // console.log (data);
+      // console.log (data.err);
     } catch (err) {
       console.log(err);
       router.push("/");
@@ -49,13 +56,12 @@ function GuestLayout({ children }) {
 
   return (
     <Layout>
-      <AdminNav />
+      <RecruiterNav />
       <Layout>
         <Content style={{ padding: "10px" }}>{children}</Content>
       </Layout>
     </Layout>
   );
-
 }
 
-export default GuestLayout;
+export default RecruiterLayout;

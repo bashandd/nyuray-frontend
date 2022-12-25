@@ -18,7 +18,7 @@ import {
   Space,
   InputNumber,
 } from "antd";
-import AdminLayout from "../../components/layout/AdminLayout";
+import MainLayout from "../../components/layout/MainLayout";
 import { ThemeContext } from "../../context/theme";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -231,7 +231,7 @@ function EditReq() {
   };
 
   return (
-    <AdminLayout>
+    <MainLayout>
       {loading ? (
         <div> Loading ...</div>
       ) : (
@@ -644,7 +644,7 @@ function EditReq() {
       )}
 
       <div></div>
-    </AdminLayout>
+    </MainLayout>
   );
 }
 

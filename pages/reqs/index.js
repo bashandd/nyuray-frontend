@@ -1,4 +1,4 @@
-import AdminLayout from "../../components/layout/AdminLayout";
+import MainLayout from "../../components/layout/MainLayout";
 import { Row, Col, Button, Divider } from "antd";
 import { Space, Table, Tag } from "antd";
 import Link from "next/link";
@@ -21,6 +21,8 @@ function Reqs() {
   const { reqs } = req;
   // hook
   const router = useRouter();
+
+  const currentUserRole = "";
 
   const columns = [
     {
@@ -106,8 +108,32 @@ function Reqs() {
 
   const fetchReqs = async () => {
     try {
+      const auth = JSON.parse(localStorage.getItem("auth"));
+
+      if (auth) {
+        currentUserRole = auth.user.role.trim();
+      }
+
       const { data } = await axios.get("/reqs");
-      setReq((prev) => ({ ...prev, reqs: data }));
+
+      if (currentUserRole === "Admin") {
+        setReq((prev) => ({ ...prev, reqs: data }));
+      } else if (currentUserRole == "Recruiter") {
+        const userEmail = auth.user.email;
+
+        const filteredData = data.filter((req) => {
+          for (let i = 0; i < req.assignedUserEmail.length; i++) {
+            if (req.assignedUserEmail[i] === userEmail) return req;
+          }
+        });
+
+        // console.log("Filtered Reqs", filteredData);
+
+        setReq((prev) => ({
+          ...prev,
+          reqs: filteredData,
+        }));
+      }
     } catch (err) {
       console.log(err);
     }
@@ -200,7 +226,7 @@ function Reqs() {
   };
 
   return (
-    <AdminLayout>
+    <MainLayout>
       <Row justify="end" style={{ marginTop: "10px" }}>
         <Col span={4}>
           <Button type="primary">
@@ -241,7 +267,7 @@ function Reqs() {
         reqAssignment={reqAssignment}
         allUsers={allUsers}
       />
-    </AdminLayout>
+    </MainLayout>
   );
 }
 
