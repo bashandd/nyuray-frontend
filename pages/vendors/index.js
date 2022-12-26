@@ -5,7 +5,6 @@ import { Form, Input, Row, Col, Button, List } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import VendorLayout from "../../components/layout/VendorLayout";
 
 const { Content, Sider } = Layout;
 
