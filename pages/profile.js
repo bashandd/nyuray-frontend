@@ -1,4 +1,3 @@
-import { ConsoleSqlOutlined } from "@ant-design/icons";
 import { Layout, Card } from "antd";
 import MainLayout from "../components/layout/MainLayout";
 const { Content, Sider } = Layout;

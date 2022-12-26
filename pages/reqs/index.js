@@ -6,6 +6,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { ReqContext } from "../../context/req";
+import { AuthContext } from "../../context/auth";
 import { useRouter } from "next/router";
 import ReqAssignmentModal from "../../components/modal/ReqAssignmentModal";
 import { toast } from "react-hot-toast";
@@ -17,12 +18,14 @@ function Reqs() {
   const [visible, setVisible] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [auth, setAuth] = useContext(AuthContext);
 
   const { reqs } = req;
   // hook
   const router = useRouter();
 
-  const currentUserRole = "";
+  let currentUserRole = "";
+  let isAllowed = false;
 
   const columns = [
     {
@@ -86,34 +89,30 @@ function Reqs() {
         </>
       ),
     },
-    {
-      title: "Action",
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle">
-          {/* <a>Invite {record.name}</a>
-          <a>Delete</a> */}
-          <a onClick={() => handlePost(record)}>Post</a>
-          <a onClick={() => handleAssign(record)}>Assign</a>
-          <a onClick={() => handleEdit(record)}>Edit</a>
-          <a onClick={() => handleDelete(record)}>Delete</a>
-        </Space>
-      ),
-    },
   ];
+
+  // useState(() => {
+  //   getUserRole();
+  // });
 
   useEffect(() => {
     fetchReqs();
   }, []);
 
+  function getUserRole() {
+    if (auth) {
+      let user = auth.user;
+
+      if (user) currentUserRole = user.role;
+
+      if (currentUserRole === "Admin") {
+        isAllowed = true;
+        return;
+      }
+    }
+  }
   const fetchReqs = async () => {
     try {
-      const auth = JSON.parse(localStorage.getItem("auth"));
-
-      if (auth) {
-        currentUserRole = auth.user.role.trim();
-      }
-
       const { data } = await axios.get("/reqs");
 
       if (currentUserRole === "Admin") {
@@ -225,19 +224,54 @@ function Reqs() {
     }
   };
 
+  getUserRole();
+  // console.log ("is Allowed", isAllowed);
+
+  if (currentUserRole === "Admin") {
+    columns.push({
+      title: "Action",
+      key: "action",
+      render: (_, record) => (
+        <Space size="middle">
+          {/* <a>Invite {record.name}</a>
+        <a>Delete</a> */}
+          <a onClick={() => handlePost(record)}>Post</a>
+          <a onClick={() => handleAssign(record)}>Assign</a>
+          <a onClick={() => handleEdit(record)}>Edit</a>
+          <a onClick={() => handleDelete(record)}>Delete</a>
+        </Space>
+      ),
+    });
+  } else {
+    columns.push({
+      title: "Action",
+      key: "action",
+      render: (_, record) => (
+        <Space size="middle">
+          {/* <a>Invite {record.name}</a>
+        <a>Delete</a> */}
+          <a onClick={() => handlePost(record)}>Post</a>
+        </Space>
+      ),
+    });
+  }
+
   return (
     <MainLayout>
       <Row justify="end" style={{ marginTop: "10px" }}>
         <Col span={4}>
-          <Button type="primary">
-            <Link href="/reqs/addreq">
-              <a>
-                <PlusOutlined /> Add New Req
-              </a>
-            </Link>
-          </Button>
+          {isAllowed && (
+            <Button type="primary">
+              <Link href="/reqs/addreq">
+                <a>
+                  <PlusOutlined /> Add New Req
+                </a>
+              </Link>
+            </Button>
+          )}
         </Col>
       </Row>
+
       <Divider orientation="left" style={{ fontSize: "24px" }}>
         All Requirements
       </Divider>
