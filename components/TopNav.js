@@ -47,8 +47,6 @@ const TopNav = () => {
       return "/admin";
     } else if (auth?.user?.role === "Recruiter") {
       return "/recruiter";
-    } else if (auth?.user?.role === "SPoC") {
-      return "/spoc";
     } else if (auth?.user?.role === "Vendor") {
       return "/vendors";
     } else if (auth?.user?.role === "Guest") {

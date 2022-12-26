@@ -41,8 +41,6 @@ function Signin() {
           router.push("/admin");
         } else if (data?.user?.role === "Recruiter") {
           router.push("/recruiter");
-        } else if (data?.user?.role === "SPoC") {
-          router.push("/spoc");
         } else if (data?.user?.role === "Vendor") {
           router.push("/vendors");
         } else if (data?.user?.role === "Guest") {

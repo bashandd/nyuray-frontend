@@ -23,6 +23,7 @@ import { useRef } from "react";
 import { CSVLink, CSVDownload } from "react-csv";
 import * as ReactDOMServer from "react-dom/server";
 import { toast } from "react-hot-toast";
+import { AuthContext } from "../../../context/auth";
 import moment from "moment";
 import {
   useContext,
@@ -85,6 +86,8 @@ const tailFormItemLayout = {
 
 export const PostCandidate = () => {
   //hooks
+  // context
+  const [auth, setAuth] = useContext(AuthContext);
 
   const router = useRouter();
   const [form, reset] = Form.useForm();
@@ -180,16 +183,16 @@ export const PostCandidate = () => {
       key: "createdBy",
     },
 
-    {
-      title: "Action",
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle">
-          <a onClick={() => handleEdit(record)}>Edit</a>
-          <a onClick={() => handleDelete(record, candidate.jobCode)}>Delete</a>
-        </Space>
-      ),
-    },
+    // {
+    //   title: "Action",
+    //   key: "action",
+    //   render: (_, record) => (
+    //     <Space size="middle">
+    //       <a onClick={() => handleEdit(record)}>Edit</a>
+    //       <a onClick={() => handleDelete(record, candidate.jobCode)}>Delete</a>
+    //     </Space>
+    //   ),
+    // },
   ];
 
   const handleEdit = async (req) => {
@@ -229,6 +232,7 @@ export const PostCandidate = () => {
         setLoading(false);
       } else {
         requirement = data;
+        console.log("Requirement", requirement);
         setRequirement(requirement);
         candidate.jobCode = requirement.jobCode;
 
@@ -297,12 +301,33 @@ export const PostCandidate = () => {
     let params = subject || body ? "?" : "";
     if (subject) params += `subject=${encodeURIComponent(subject)}`;
 
-       if (body)
-      params += `${subject ? "&" : ""}body=${encodeURIComponent(body)}`;
+    if (body) params += `${subject ? "&" : ""}body=${encodeURIComponent(body)}`;
 
     return <Button href={`mailto:${email}${params}`}>{children}</Button>;
   };
 
+  // console.log ("auth", auth);
+  let user = auth.user;
+  //   console.log ("user", user);
+
+  // console.log ("auth.user.role", user.role);
+  if (user != null) {
+    if (user.role === "Admin") {
+      columns.push({
+        title: "Action",
+        key: "action",
+        render: (_, record) => (
+          <Space size="middle">
+            <a onClick={() => handleEdit(record)}>Edit</a>
+            <a onClick={() => handleDelete(record, candidate.jobCode)}>
+              Delete
+            </a>
+          </Space>
+        ),
+      });
+    }
+  }
+  console.log("Columns", columns);
   return (
     <MainLayout>
       <Row justify="end" style={{ marginTop: "10px" }}>
@@ -1021,13 +1046,12 @@ export const PostCandidate = () => {
 
           <Mailto
             email="bashandd@gmail.com"
-            subject={requirement.reqName +"-"+ requirement.jobCode}
+            subject={requirement.reqName + "-" + requirement.jobCode}
             // body={document.getElementById('candidateListTable').outerHTML.toString()}
-            body = {"Add Email body here"}
+            body={"Add Email body here"}
           >
             Send Email
           </Mailto>
-
         </Form>
       )}
     </MainLayout>
