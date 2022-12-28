@@ -16,6 +16,7 @@ import {
   Select,
   DatePicker,
   Spin,
+  Tag,
 } from "antd";
 import { Table } from "ant-table-extensions";
 import { useRouter } from "next/router";
@@ -139,6 +140,7 @@ export const PostCandidate = () => {
   const [loading, setLoading] = useState(false);
   const [media, setMedia] = useContext(MediaContext);
   const [candidateList, setcandidateList] = useState([]);
+  const [skillItems, setSkillItems] = useState([""]);
 
   const columns = [
     {
@@ -179,6 +181,38 @@ export const PostCandidate = () => {
       key: "noticePeriod",
     },
     {
+      title: "Primary Skills",
+      dataIndex: "primarySkills",
+      key: "primarySkills",
+      render: (_, { primarySkills }) => (
+        <>
+          {primarySkills.map((skill) => {
+            let color = skill.length > 5 ? "geekblue" : "green";
+            if (skill === "Java") {
+              color = "volcano";
+            }
+            return <Tag key={skill}>{skill}</Tag>;
+          })}
+        </>
+      ),
+    },
+    {
+      title: "Secondary Skills",
+      dataIndex: "secondarySkills",
+      key: "secondarySkills",
+      render: (_, { secondarySkills }) => (
+        <>
+          {secondarySkills.map((skill) => {
+            let color = skill.length > 5 ? "geekblue" : "green";
+            if (skill === "Java") {
+              color = "volcano";
+            }
+            return <Tag key={skill}>{skill}</Tag>;
+          })}
+        </>
+      ),
+    },
+    {
       title: "Created By",
       dataIndex: "createdBy",
       key: "createdBy",
@@ -203,8 +237,9 @@ export const PostCandidate = () => {
   ];
 
   const handleEdit = async (req) => {
-    console.log("Editing Candiddate", req);
+    console.log("Editing Candidate", req);
   };
+
   const handleDelete = async (req, jobCode) => {
     try {
       const answer = window.confirm(
@@ -239,7 +274,7 @@ export const PostCandidate = () => {
         setLoading(false);
       } else {
         requirement = data;
-        console.log("Requirement", requirement);
+        //  console.log("Requirement", requirement);
         setRequirement(requirement);
         candidate.jobCode = requirement.jobCode;
 
@@ -261,6 +296,10 @@ export const PostCandidate = () => {
   useEffect(() => {
     loadRequirement();
   }, [router?.query?.slug]);
+
+  useEffect(() => {
+    getSkills();
+  }, []);
 
   //allow only last 40 years and one next year to allow freshers coming out of college.
   function disabledDate(current) {
@@ -315,9 +354,6 @@ export const PostCandidate = () => {
 
   // console.log ("auth", auth);
   let user = auth.user;
-  //   console.log ("user", user);
-
-  // console.log ("auth.user.role", user.role);
   if (user != null) {
     if (user.role === "Admin") {
       columns.push({
@@ -325,7 +361,7 @@ export const PostCandidate = () => {
         key: "action",
         render: (_, record) => (
           <Space size="middle">
-            <a onClick={() => handleEdit(record)}>Edit</a>
+            {/* <a onClick={() => handleEdit(record)}>Edit</a> */}
             <a onClick={() => handleDelete(record, candidate.jobCode)}>
               Delete
             </a>
@@ -334,7 +370,35 @@ export const PostCandidate = () => {
       });
     }
   }
-  //console.log("Columns", columns);
+  // Get Skills to add to a candidate
+  const getSkills = async () => {
+    try {
+      const { data } = await axios.get("/skills");
+      if (data?.error) {
+        toast.error(data.error);
+      } else {
+        setSkillItems(data);
+        //console.log("Skill Items", skillItems);
+      }
+    } catch (e) {
+      toast.error(e);
+    }
+  };
+
+  const handlePrimarySkillChange = (value) => {
+    setCandidate({
+      ...candidate,
+      primarySkills: value,
+    });
+  };
+
+  const handleSecondarySkillChange = (value) => {
+    setCandidate({
+      ...candidate,
+      secondarySkills: value,
+    });
+  };
+
   return (
     <MainLayout>
       <Row justify="end" style={{ marginTop: "10px" }}>
@@ -703,16 +767,33 @@ export const PostCandidate = () => {
                   },
                 ]}
               >
-                <Input
-                  value={candidate.primarySkills}
-                  placeholder="Primary Skills"
-                  onChange={(e) => {
-                    setCandidate({
-                      ...candidate,
-                      primarySkills: e.target.value,
-                    });
+                <Select
+                  mode="multiple"
+                  style={{ fontSize: "18px" }}
+                  placeholder="Select Skills"
+                  onChange={(values) => {
+                    handlePrimarySkillChange(values);
                   }}
-                />
+                  dropdownRender={(menu) => (
+                    <>
+                      {menu}
+                      <Divider
+                        style={{
+                          margin: "8px 0",
+                        }}
+                      />
+                      <Space
+                        style={{
+                          padding: "0 8px 4px",
+                        }}
+                      ></Space>
+                    </>
+                  )}
+                >
+                  {skillItems.map((item) => (
+                    <Option key={item.name}>{item.name}</Option>
+                  ))}
+                </Select>
               </Form.Item>
             </Col>
             <Col span={8}>
@@ -727,16 +808,33 @@ export const PostCandidate = () => {
                   },
                 ]}
               >
-                <Input
-                  value={candidate.secondarySkills}
-                  placeholder="Secondary Skills"
-                  onChange={(e) => {
-                    setCandidate({
-                      ...candidate,
-                      secondarySkills: e.target.value,
-                    });
+                <Select
+                  mode="multiple"
+                  style={{ fontSize: "18px" }}
+                  placeholder="Select Skills"
+                  onChange={(values) => {
+                    handleSecondarySkillChange(values);
                   }}
-                />
+                  dropdownRender={(menu) => (
+                    <>
+                      {menu}
+                      <Divider
+                        style={{
+                          margin: "8px 0",
+                        }}
+                      />
+                      <Space
+                        style={{
+                          padding: "0 8px 4px",
+                        }}
+                      ></Space>
+                    </>
+                  )}
+                >
+                  {skillItems.map((item) => (
+                    <Option key={item.name}>{item.name}</Option>
+                  ))}
+                </Select>
               </Form.Item>
             </Col>
           </Row>

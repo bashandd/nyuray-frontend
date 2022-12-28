@@ -71,7 +71,7 @@ const MainNav = () => {
       <Menu
         // defaultSelectedKeys={["1"]}
         // defaultOpenKeys={["2", "7", "11"]}
-        defaultOpenKeys={["3"]}
+        defaultOpenKeys={["1"]}
         mode="inline"
         //inlineCollapsed={collapsed}
       >
@@ -88,6 +88,11 @@ const MainNav = () => {
                 <a className={activeName("/reqs")}>All Reqs</a>
               </Link>
             </Menu.Item>
+            <Menu.Item key="4">
+              <Link href="/search">
+                <a className={activeName("/search")}>Search Profiles</a>
+              </Link>
+            </Menu.Item>
           </SubMenu>
         ) : (
           <SubMenu key="2" icon={<PushpinOutlined />} title="Requirements">
@@ -96,12 +101,17 @@ const MainNav = () => {
                 <a className={activeName("/reqs")}>My Reqs</a>
               </Link>
             </Menu.Item>
+            <Menu.Item key="4">
+              <Link href="/search">
+                <a className={activeName("/search")}>Search Profiles</a>
+              </Link>
+            </Menu.Item>
           </SubMenu>
         )}
 
         {isAdmin && (
-          <SubMenu key="4" icon={<PushpinOutlined />} title="Clients">
-            <Menu.Item key="5">
+          <SubMenu key="5" icon={<PushpinOutlined />} title="Clients">
+            <Menu.Item key="6">
               <Link href="/clients">
                 <a className={activeName("/clients")}>All Clients</a>
               </Link>
@@ -117,8 +127,8 @@ const MainNav = () => {
 
         {/* vendors */}
         {isAdmin && (
-          <SubMenu key="6" icon={<GroupOutlined />} title="Vendors">
-            <Menu.Item key="7">
+          <SubMenu key="7" icon={<GroupOutlined />} title="Vendors">
+            <Menu.Item key="8">
               <Link href="/vendors">
                 <a className={activeName("/vendors")}>All Vendors</a>
               </Link>
@@ -128,8 +138,8 @@ const MainNav = () => {
 
         {/* users */}
         {isAdmin && (
-          <SubMenu key="8" icon={<UsergroupAddOutlined />} title="Users">
-            <Menu.Item key="9">
+          <SubMenu key="9" icon={<UsergroupAddOutlined />} title="Users">
+            <Menu.Item key="10">
               <Link href="/users">
                 <a className={activeName("/users")}>All Users</a>
               </Link>
@@ -138,7 +148,7 @@ const MainNav = () => {
         )}
 
         {/* profile */}
-        <Menu.Item key="10" icon={<UserOutlined />}>
+        <Menu.Item key="11" icon={<UserOutlined />}>
           <Link href="/profile">
             <a className={activeName("/profile")}>Profile</a>
           </Link>
