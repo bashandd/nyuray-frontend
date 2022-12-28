@@ -9,7 +9,7 @@ import {
 } from "react";
 import { toast } from "react-hot-toast";
 import MainLayout from "../components/layout/MainLayout";
-import { Divider } from "antd";
+import { Divider, Spin,  Col } from "antd";
 
 function SearchProfiles() {
   const columns = [
@@ -78,20 +78,28 @@ function SearchProfiles() {
     },
   ];
   const [candidateList, setcandidateList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const getAllCandidatesFromDB = async () => {
-    console.log("getAllCandidatesFromDB");
+
     try {
+      
       const { data } = await axios.get(`/get-all-candidates`);
-      console.log("data", data);
+     
+     
       setcandidateList(data);
-      console.log("CandidateList ", candidateList);
+      setLoading(false);
+
     } catch (e) {
       toast.error(e);
+      setLoading(false);
+      
     }
   };
   useEffect(() => {
+    setLoading(true);
     getAllCandidatesFromDB();
+  
   }, []);
 
   return (
@@ -106,7 +114,11 @@ function SearchProfiles() {
       >
         <h1> Search Profiles here</h1>
       </Divider>
-
+      {loading ? (
+        <Col align="center">
+          <Spin size="large" />
+        </Col>
+      ) : (
       <Table
         columns={columns}
         id="candidateListTable"
@@ -128,6 +140,7 @@ function SearchProfiles() {
         }}
         dataSource={candidateList}
       />
+      )}
     </MainLayout>
   );
 }

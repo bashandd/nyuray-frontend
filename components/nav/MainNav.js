@@ -16,6 +16,7 @@ import {
   UserOutlined,
   CommentOutlined,
   AppstoreAddOutlined,
+  SearchOutlined,
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
@@ -88,11 +89,6 @@ const MainNav = () => {
                 <a className={activeName("/reqs")}>All Reqs</a>
               </Link>
             </Menu.Item>
-            <Menu.Item key="4">
-              <Link href="/search">
-                <a className={activeName("/search")}>Search Profiles</a>
-              </Link>
-            </Menu.Item>
           </SubMenu>
         ) : (
           <SubMenu key="2" icon={<PushpinOutlined />} title="Requirements">
@@ -101,13 +97,13 @@ const MainNav = () => {
                 <a className={activeName("/reqs")}>My Reqs</a>
               </Link>
             </Menu.Item>
-            <Menu.Item key="4">
-              <Link href="/search">
-                <a className={activeName("/search")}>Search Profiles</a>
-              </Link>
-            </Menu.Item>
           </SubMenu>
         )}
+        <Menu.Item key="4" icon={<SearchOutlined />}>
+          <Link href="/search">
+            <a className={activeName("/search")}>Search Profiles</a>
+          </Link>
+        </Menu.Item>
 
         {isAdmin && (
           <SubMenu key="5" icon={<PushpinOutlined />} title="Clients">

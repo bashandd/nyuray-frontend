@@ -17,11 +17,11 @@ import {
   DatePicker,
   Spin,
   Tag,
-  Option,
 } from "antd";
 import { Table } from "ant-table-extensions";
 import { useRouter } from "next/router";
 import { useRef } from "react";
+
 import { CSVLink, CSVDownload } from "react-csv";
 import * as ReactDOMServer from "react-dom/server";
 import { toast } from "react-hot-toast";
@@ -47,6 +47,7 @@ import MainLayout from "../../../components/layout/MainLayout";
 import configData from "../../../config/config.json";
 
 const { Meta } = Card;
+const { Option } = Select;
 
 const formItemLayout = {
   labelCol: {

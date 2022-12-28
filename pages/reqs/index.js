@@ -1,5 +1,5 @@
 import MainLayout from "../../components/layout/MainLayout";
-import { Row, Col, Button, Divider } from "antd";
+import { Row, Col, Button, Divider, Spin } from "antd";
 import { Space, Table, Tag } from "antd";
 import Link from "next/link";
 import { PlusOutlined } from "@ant-design/icons";
@@ -96,6 +96,7 @@ function Reqs() {
   // });
 
   useEffect(() => {
+    setLoading(true);
     fetchReqs();
   }, []);
 
@@ -119,7 +120,6 @@ function Reqs() {
         setReq((prev) => ({ ...prev, reqs: data }));
       } else if (currentUserRole == "Recruiter") {
         const userEmail = auth.user.email;
-
         const filteredData = data.filter((req) => {
           for (let i = 0; i < req.assignedUserEmail.length; i++) {
             if (req.assignedUserEmail[i] === userEmail) return req;
@@ -132,9 +132,12 @@ function Reqs() {
           ...prev,
           reqs: filteredData,
         }));
+
       }
+      setLoading(false);
     } catch (err) {
       console.log(err);
+      setLoading(false);
     }
   };
 
@@ -275,6 +278,11 @@ function Reqs() {
       <Divider orientation="left" style={{ fontSize: "24px" }}>
         All Requirements
       </Divider>
+      {loading ? (
+        <Col align="center">
+          <Spin size="large" />
+        </Col>
+      ) : (
 
       <Table
         columns={columns}
@@ -293,6 +301,7 @@ function Reqs() {
         }}
         dataSource={reqs}
       />
+      )}
 
       <ReqAssignmentModal
         isModalOpen={visible}
