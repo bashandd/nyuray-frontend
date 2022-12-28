@@ -187,7 +187,7 @@ export const PostCandidate = () => {
       title: "Resume URL",
       dataIndex: "resumePath",
       key: "resumePath",
-      render: (text) => <a href={text} > Resume</a>,
+      render: (text, record) => <a href={text}> {record.resumeFileName} </a>,
     },
 
     // {
@@ -461,7 +461,8 @@ export const PostCandidate = () => {
             footer={null}
           >
             {media?.selected &&
-              (candidate.resumePath = media.resumes.at(-1).url)}
+              (candidate.resumePath = media.resumes.at(-1).url) &&
+              (candidate.resumeFileName = media.resumes.at(-1).fileName)}
           </Modal>
           {/* media modal */}
           <Modal
