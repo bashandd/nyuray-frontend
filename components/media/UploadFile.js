@@ -7,6 +7,7 @@ import { UploadOutlined } from "@ant-design/icons";
 
 
 const UploadFile = () => {
+  console.log ("In UploadFile");
   // context
   const [auth, setAuth] = useContext(AuthContext);
   const [media, setMedia] = useContext(MediaContext);
@@ -42,7 +43,9 @@ const UploadFile = () => {
           resumes: [...media.resumes, info.file.response],
           selected: info.file.response,
           showMediaModal: false,
+         
         });
+
       } else if (info.file.status === "error") {
         message.error(`${info.file.name} file upload failed.`);
       }

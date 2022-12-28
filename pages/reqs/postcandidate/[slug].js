@@ -112,6 +112,7 @@ export const PostCandidate = () => {
   const [candidate, setCandidate] = useState({
     jobCode: "",
     resumePath: "",
+    resumeFileName: "",
     candidateName: "",
     contactNumber: 0,
     candidateEmail: "",
@@ -144,7 +145,7 @@ export const PostCandidate = () => {
       title: "Candidate Name",
       dataIndex: "candidateName",
       key: "candidateName",
-      // description: "jobDescription",
+      // description: "candidateName",
       render: (text) => <a>{text}</a>,
     },
     {
@@ -181,6 +182,12 @@ export const PostCandidate = () => {
       title: "Created By",
       dataIndex: "createdBy",
       key: "createdBy",
+    },
+    {
+      title: "Resume URL",
+      dataIndex: "resumePath",
+      key: "resumePath",
+      render: (text) => <a href={text} > Resume</a>,
     },
 
     // {
@@ -327,7 +334,7 @@ export const PostCandidate = () => {
       });
     }
   }
-  console.log("Columns", columns);
+  //console.log("Columns", columns);
   return (
     <MainLayout>
       <Row justify="end" style={{ marginTop: "10px" }}>
