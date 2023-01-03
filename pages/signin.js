@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { Form, Input, Button, Checkbox, Col, Row } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
+import {MainLayout} from "../components/layout/MainLayout"
 import Link from "next/link";
 import axios from "axios";
 import { toast } from "react-hot-toast";
@@ -57,6 +58,9 @@ function Signin() {
   };
 
   return (
+
+
+ 
     <Row>
       <Col span={8} offset={8}>
         <h1 style={{ paddingTop: "100px" }}>Signin</h1>
@@ -114,6 +118,7 @@ function Signin() {
         </Form>
       </Col>
     </Row>
+
   );
 }
 

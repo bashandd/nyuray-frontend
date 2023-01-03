@@ -1,3 +1,6 @@
+import "../public/css/theme.sass";
+import "@fortawesome/fontawesome-free/css/all.css";
+import { AnimateSharedLayout } from "framer-motion";
 import { ThemeProvider } from "../context/theme";
 import { AuthProvider } from "../context/auth";
 import { ReqProvider } from "../context/req";
@@ -39,7 +42,7 @@ function MyApp({ Component, pageProps }) {
                   },
                 }}
               />
-              <TopNav />
+             <TopNav />
               <Component {...pageProps} />
             </MediaProvider>
           </ReqProvider>

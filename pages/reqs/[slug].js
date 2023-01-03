@@ -31,6 +31,8 @@ const { Option } = Select;
 const { Content, Sider } = Layout;
 const { TextArea } = Input;
 
+
+
 let index = 0;
 
 const formItemLayout = {
@@ -71,6 +73,8 @@ const tailFormItemLayout = {
 function EditReq() {
   // load from local storage
 
+
+
   // context
   const [theme, setTheme] = useContext(ThemeContext);
   // state
@@ -101,11 +105,16 @@ function EditReq() {
   const [skillName, setSkillName] = useState("");
   const inputRef = useRef(null);
   const formRef = useRef(null);
+  const [formDisabled, setFormDisabled] = useState(false);
+
+
 
   // hook
   const router = useRouter();
   const [form, reset] = Form.useForm();
   const { Option } = Select;
+
+
 
   const loadRequirement = async (data) => {
     try {
@@ -176,6 +185,8 @@ function EditReq() {
 
   useEffect(() => {
     getSkills();
+    if (router.query.view) { setFormDisabled (true);}
+    console.log("FormDisabled", formDisabled);
   }, []);
 
   const getSkills = async () => {
@@ -230,6 +241,7 @@ function EditReq() {
     }, 0);
   };
 
+  console.log ("....", router.query.view);
   return (
     <MainLayout>
       {loading ? (
@@ -239,6 +251,8 @@ function EditReq() {
           ref={formRef}
           {...formItemLayout}
           form={form}
+          disabled = {formDisabled}
+          // disabled = {router.query.view}
 
           layout="horizontal"
           name="addRequirementForm"

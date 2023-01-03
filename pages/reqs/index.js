@@ -20,6 +20,7 @@ function Reqs() {
   const [loading, setLoading] = useState(false);
   const [auth, setAuth] = useContext(AuthContext);
 
+
   const { reqs } = req;
   // hook
   const router = useRouter();
@@ -27,13 +28,19 @@ function Reqs() {
   let currentUserRole = "";
   let isAllowed = false;
 
+
   const columns = [
     {
       title: "Req Name",
       dataIndex: "reqName",
       key: "reqName",
       description: "jobDescription",
-      render: (text) => <a>{text}</a>,
+      // render: (text) => <a>{text}</a>,
+      render: (_, record) => (
+     
+           <a onClick={() => handleView(record)}>{record.reqName}</a>
+         //  <a onClick={() => router.push(`/reqs/${record.slug}`)}>{record.reqName}</a>
+      ),
     },
     {
       title: "Req Type",
@@ -154,9 +161,19 @@ function Reqs() {
     }
   };
 
-  const handleEdit = async (req) => {
-    return router.push(`/reqs/${req.slug}`);
+  const handleView = async (req) => {
+   
+    return router.push({pathname: `/reqs/${req.slug}`,   query: { view: true }});
   };
+  const handleEdit = async (req) => {
+   
+    return router.push({pathname: `/reqs/${req.slug}`,   query: { view: false }});
+  };
+  
+  // const handleSingleReq = async (req) => {
+  //   return router.push(`/reqs/${req.slug}`);
+  // };
+
 
   const handlePost = async (req) => {
     return router.push(`/reqs/postcandidate/${req.slug}`);

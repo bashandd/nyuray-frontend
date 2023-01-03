@@ -1,84 +1,65 @@
-import { useContext } from "react";
-import { AuthContext } from "../context/auth";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { Button, Image, Row, Col } from "antd";
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import StyledLink from "../components/StyledLink";
 
-function Home() {
-  //context
-  const [auth, setAuth] = useContext(AuthContext);
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   const timer =  setTimeout(() => {
-  //     setLoading(false);
-  //   }, 20000);
-  //   router.push("/signin");
-  //   return () => clearTimeout(timer);
-  // }, []);
-
-  const handleEnter = () => {
-    router.push("/signin");
-  };
-
+export default function Home() {
   return (
-    //     <Image
-    //     width={200}
+    <div>
 
-    // src="./public/images/FrontPage-1.png"
-    //   />
-    // <div className="container">
-    //   {loading ? (
-    //     <div className="loader-container">
-    //       <div className="spinner"></div>
-    //       {/* <Image
 
-    //         src="./public/images/lightray-1.jpg"
+    <section className="hero section is-block is-relative is-medium" style={{backgroundColor: "#00246B"}}>
+      <div className="container">
+        <div className="columns is-vcentered is-desktop">
+          <div className="column">
+            <motion.figure className="image" layoutId="image">
+              <Image
+                src="/assets/recruitement.png"
+                layout="responsive"
+                width={640}
+                height={321}
+              />
+            </motion.figure>
+          </div>
+          <div className="column is-8-desktop has-text-centered-touch">
+            <header>
+              <motion.h1
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                className="title has-text-weight-bold is-1 is-size-2-mobile is-spaced"
+                layoutId="title"
+                style={{color: "white"}}
+              >
+                NyuRay - Applicant Tracking System
+              </motion.h1>
+              <motion.p
+                className="subtitle"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                style={{color: "white"}}
+              >
+                We strive to make the entire recruitement process easy, fast and hassel free
+              </motion.p>
+            </header>
+            <motion.div
+              className="buttons is-inline-flex mt-5"
+              initial={{ y: -50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.4 }}
+            >
+            <br/> 
+       
+            <br/> 
+              <Link href="/features" passHref>
+                <StyledLink>Explore</StyledLink>
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    //       ></Image> */}
-    //     </div>
-    //   ) : (
-    <div
-      style={{
-        background: "lightblue",
-      }}
-      // class="w3-container w3-center w3-animate-zoom"
-    >
-      <Row>
-        <Col span={12} offset={4}>
-          <Image
-            style={{
-             
-              marginLeft: "150px",
-              marginRight: "auto",
-              width: "100%",
-            }}
-            src="https://cdn.pixabay.com/photo/2013/07/12/15/19/prismatic-colors-149677_1280.png"
-          ></Image>
-          <h1
-            style={{
-              textAlign: "center",
-              marginLeft: "300px",
-              marginTop: "0px",
-              // backgroundImage: `url ("https://cdn.pixabay.com/photo/2013/07/12/15/19/prismatic-colors-149677_1280.png")`,
-            }}
-          >
-            Welcome to NyuRay
-          </h1>
-          <Button
-            style={{ marginLeft: "480px", marginTop: "20px" }}
-            type="primary"
-            onClick={handleEnter}
-          >
-            Enter
-          </Button>
-        </Col>
-      </Row>
-      {/* <Image src="https://cdn.pixabay.com/photo/2013/07/12/15/19/prismatic-colors-149677_1280.png" alt="NyuRay" style="width:100%"/> */}
     </div>
   );
 }
-
-export default Home;
