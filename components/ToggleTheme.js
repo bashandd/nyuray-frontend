@@ -10,7 +10,9 @@ const ToggleTheme = () => {
       <Head>
         <link rel="stylesheet" href={`/css/${theme}.css`} />
       </Head>
-      {theme === "light" ? (
+
+      {/* Basha - Commented the code to enable the dark/light theme */}
+      {/* {theme === "light" ? (
         <span
           onClick={() => {
             setTheme("dark");
@@ -30,7 +32,7 @@ const ToggleTheme = () => {
         >
           🌞
         </span>
-      )}
+      )} */}
     </>
   );
 };

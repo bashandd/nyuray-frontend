@@ -77,8 +77,8 @@ const MainNav = () => {
         //inlineCollapsed={collapsed}
       >
         <Menu.Item key="1" icon={<SettingOutlined />}>
-          <Link href="/dashboard">
-            <a className={activeName("/dashboard")}>Dashboard</a>
+          <Link href="/admin">
+            <a className={activeName("/admin")}>Dashboard</a>
           </Link>
         </Menu.Item>
 

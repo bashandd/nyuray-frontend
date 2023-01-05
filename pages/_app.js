@@ -9,6 +9,9 @@ import { MediaProvider } from "../context/media";
 import { Toaster, ToastBar } from "react-hot-toast";
 import TopNav from "../components/TopNav";
 import "../public/css/styles.css";
+import '../public/css/chart.css';
+import '../public/css/ChartCard.css';
+import '../public/css/MiniProgress.css';
 
 // import "antd/dist/antd.css";
 // import "antd/dist/antd.dark.css";

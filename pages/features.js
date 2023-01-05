@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import StyledLink from "../components/StyledLink";
+import {  Card } from "antd";
 
 function FeatureItem({ title, subtitle, icon, isLeftAligned, color }) {
   return (
@@ -26,6 +27,15 @@ function FeatureItem({ title, subtitle, icon, isLeftAligned, color }) {
 
 export default function Features() {
   return (
+    // <Card
+    //         style={{
+    //           // width: 1600,
+    //           // margin: "20px",
+    //           borderRadius: "20px",
+    //           overflow: "hidden",
+    //           backgroundColor: "whitesmoke",
+    //         }}
+    //       >
     <section className="hero section is-block is-relative is-medium">
       <div className="container">
         <div className="columns is-vcentered is-variable is-desktop">
@@ -109,5 +119,6 @@ export default function Features() {
         </motion.div>
       </div>
     </section>
+    // </Card>
   );
 }

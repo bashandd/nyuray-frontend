@@ -17,6 +17,7 @@ import {
   DatePicker,
   Spin,
   Tag,
+  Collapse,
 } from "antd";
 import { Table } from "ant-table-extensions";
 import { useRouter } from "next/router";
@@ -35,11 +36,9 @@ import {
   useForm,
 } from "react";
 import {
-  ConsoleSqlOutlined,
-  DeleteTwoTone,
-  DownloadOutlined,
   FilePdfOutlined,
   UploadOutlined,
+  PlusOutlined,
 } from "@ant-design/icons";
 import Media from "../../../components/media";
 import { MediaContext } from "../../../context/media";
@@ -48,6 +47,7 @@ import configData from "../../../config/config.json";
 
 const { Meta } = Card;
 const { Option } = Select;
+const { Panel } = Collapse;
 
 const formItemLayout = {
   labelCol: {
@@ -238,6 +238,16 @@ export const PostCandidate = () => {
     // },
   ];
 
+  const [selectedMatchingProfileRowKeys, setSelectedMatchingProfileRowKeys] = useState([]);
+  const handleSelectChange = (newSelectedRowKeys) => {
+    console.log('selectedRowKeys changed: ', newSelectedRowKeys);
+    setSelectedMatchingProfileRowKeys(newSelectedRowKeys);
+  };
+  const matchingProfileRowSelection = {
+    selectedMatchingProfileRowKeys,
+    onChange: handleSelectChange,
+  };
+
   const handleEdit = async (req) => {
     console.log("Editing Candidate", req);
   };
@@ -401,6 +411,11 @@ export const PostCandidate = () => {
     });
   };
 
+
+  const handlePanelChange = (key) => {
+    console.log(key);
+  };
+
   return (
     <MainLayout>
       <Row justify="end" style={{ marginTop: "10px" }}>
@@ -543,6 +558,27 @@ export const PostCandidate = () => {
           >
             <Media />
           </Modal>
+
+          {/* Matching Profiles section */}
+
+          <Collapse
+            // defaultActiveKey={["1"]}
+            onChange={handlePanelChange}
+            expandIcon={({ isActive }) => <PlusOutlined rotate={isActive ? 90 : 0} />}
+          >
+            <Panel header="Matching Profiles" style={{size: "16px"}} key="1">
+            <Table
+            columns={columns}
+            id="matchingCandidateListTable"
+            rowSelection={matchingProfileRowSelection}
+            rowKey={(record) => record.candidateEmail}
+            // style={{ fontSize: "24px" }}
+            dataSource={candidateList}
+          />
+            </Panel>
+          </Collapse>
+
+          {/* Candidate Details section */}
           <Divider
             orientation="left"
             orientationMargin="0"

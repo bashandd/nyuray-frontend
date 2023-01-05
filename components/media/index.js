@@ -10,7 +10,9 @@ const Media = () => {
     <Tabs
       items={new Array(
         { label: "Upload Resume", key: 1, children: <UploadFile /> },
-        { label: "Resume Library", key: 2, children: <ResumeLibrary /> })}
+        // commenting  resume library for now. It is working but need to discuss whether to show only matching resumes or all resumes
+        // { label: "Resume Library", key: 2, children: <ResumeLibrary /> }
+        )}
     />
   );
 };
