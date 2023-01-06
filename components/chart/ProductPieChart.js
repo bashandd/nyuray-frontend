@@ -1,5 +1,5 @@
 import React from 'react';
-import { Interaction, PieChart } from 'bizcharts';
+// import { Interaction, PieChart } from 'bizcharts';
 import { Card } from 'antd';
 
 const pieData = [

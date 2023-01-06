@@ -1,5 +1,5 @@
 import React from 'react';
-import { Chart, Interval, Tooltip } from 'bizcharts';
+// import { Chart, Interval, Tooltip } from 'bizcharts';
 import { Card } from 'antd';
 
 const barData = [
