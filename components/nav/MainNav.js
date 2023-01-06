@@ -76,11 +76,19 @@ const MainNav = () => {
         mode="inline"
         //inlineCollapsed={collapsed}
       >
-        <Menu.Item key="1" icon={<SettingOutlined />}>
-          <Link href="/admin">
-            <a className={activeName("/admin")}>Dashboard</a>
-          </Link>
-        </Menu.Item>
+        {isAdmin ? (
+          <Menu.Item key="1" icon={<SettingOutlined />}>
+            <Link href="/admin">
+              <a className={activeName("/admin")}>Dashboard</a>
+            </Link>
+          </Menu.Item>
+        ) : (
+          <Menu.Item key="1" icon={<SettingOutlined />}>
+            <Link href="/recruiter">
+              <a className={activeName("/recruiter")}>Dashboard</a>
+            </Link>
+          </Menu.Item>
+        )}
 
         {isAdmin ? (
           <SubMenu key="2" icon={<PushpinOutlined />} title="Requirements">

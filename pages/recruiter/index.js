@@ -6,7 +6,7 @@ function Recruiter() {
   return (
   <MainLayout> 
   <h1 style={{paddingTop:"20px", paddingLeft:"40px"}}>
-    This is Recruiter page.
+    This is Recruiter Dashboard page.
   </h1>
   </MainLayout>
   );
