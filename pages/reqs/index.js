@@ -31,6 +31,12 @@ function Reqs() {
 
   const columns = [
     {
+      title: "Req ID",
+      dataIndex: "reqID",
+      key: "reqID",
+      // render: (reqID) => <p>REQ-{reqID}</p>,
+    },
+    {
       title: "Req Name",
       dataIndex: "reqName",
       key: "reqName",

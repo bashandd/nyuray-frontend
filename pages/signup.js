@@ -220,6 +220,14 @@ const Register = () => {
                   required: true,
                   message: "Please input your phone number!",
                 },
+                {
+                    type: "string",
+                    min: 10,
+                    max: 10,
+                    pattern: "^([-]?[1-9][0-9]*|0)$",
+
+                    message: "Please input 10 digit contact number",
+                  },
               ]}
             >
               <Input
