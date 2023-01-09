@@ -9,7 +9,9 @@ import {
 } from "react";
 import { toast } from "react-hot-toast";
 import MainLayout from "../components/layout/MainLayout";
-import { Divider, Spin,  Col } from "antd";
+import { Divider, Spin, Col } from "antd";
+import moment from "moment";
+import { MagnifyingGlass } from "react-loader-spinner";
 
 function SearchProfiles() {
   const columns = [
@@ -36,10 +38,10 @@ function SearchProfiles() {
       key: "candidateLocation",
     },
     {
-        title: "Total Exp",
-        dataIndex: "totalExp",
-        key: "totalExp",
-      },
+      title: "Total Exp",
+      dataIndex: "totalExp",
+      key: "totalExp",
+    },
     {
       title: "Primary Skills",
       dataIndex: "primarySkills",
@@ -49,6 +51,23 @@ function SearchProfiles() {
       title: "Secondary Skills",
       dataIndex: "secondarySkills",
       key: "secondarySkills",
+    },
+
+    {
+      title: "Created By",
+      dataIndex: "createdBy",
+      key: "createdBy",
+    },
+    {
+      title: "Created Days Ago",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: (text) => {
+        let today = moment();
+        let createdDate = moment(text);
+        // console.log ("Diff", today.diff(createdDate, "days"));
+        return <p>{today.diff(createdDate, "days")}</p>;
+      },
     },
     // {
     //   title: "Current CTC",
@@ -81,34 +100,26 @@ function SearchProfiles() {
   const [loading, setLoading] = useState(false);
 
   const getAllCandidatesFromDB = async () => {
-
     try {
-      
       const { data } = await axios.get(`/get-all-candidates`);
-     
-     
-      setcandidateList(data);
+      if (data) setcandidateList(data);
       setLoading(false);
-
     } catch (e) {
       toast.error(e);
       setLoading(false);
-      
     }
   };
   useEffect(() => {
     setLoading(true);
+
     getAllCandidatesFromDB();
-  
   }, []);
 
   return (
     <MainLayout>
       <Divider
-      
         orientationMargin="0"
         style={{
-
           fontSize: "24px",
         }}
       >
@@ -116,30 +127,39 @@ function SearchProfiles() {
       </Divider>
       {loading ? (
         <Col align="center">
-          <Spin size="large" />
+          <MagnifyingGlass
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="MagnifyingGlass-loading"
+            wrapperStyle={{}}
+            wrapperClass="MagnifyingGlass-wrapper"
+            glassColor="#c0efff"
+            color="#e15b64"
+          />
         </Col>
       ) : (
-      <Table
-        columns={columns}
-        id="candidateListTable"
-        rowKey="reqName"
-        style={{ fontSize: "24px" }}
-        exportable
-        exportableProps={{ showColumnPicker: true }}
-        searchable
-        expandable={{
-          expandedRowRender: (record) => (
-            <p
-              style={{
-                marginLeft: "50px",
-              }}
-            >
-              {record.primarySkills}
-            </p>
-          ),
-        }}
-        dataSource={candidateList}
-      />
+        <Table
+          columns={columns}
+          id="candidateListTable"
+          rowKey="reqName"
+          style={{ fontSize: "24px" }}
+          exportable
+          exportableProps={{ showColumnPicker: true }}
+          searchable
+          expandable={{
+            expandedRowRender: (record) => (
+              <p
+                style={{
+                  marginLeft: "50px",
+                }}
+              >
+                {record.primarySkills}
+              </p>
+            ),
+          }}
+          dataSource={candidateList}
+        />
       )}
     </MainLayout>
   );
