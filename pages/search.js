@@ -19,7 +19,15 @@ function SearchProfiles() {
       title: "Candidate ID",
       dataIndex: "candidateID",
       key: "candidateID",
-      render: (text) => <a>{text}</a>,
+      render: (text) => (
+        <a
+          style={{
+            marginLeft: "30px",
+          }}
+        >
+          {text}
+        </a>
+      ),
     },
     {
       title: "Candidate Name",
@@ -160,9 +168,8 @@ function SearchProfiles() {
                   marginLeft: "50px",
                 }}
               >
-                Current CTC : {record.currentCTC} :::
-                Expected CTC : {record.expectedCTC} :::
-                Notice Period : {record.noticePeriod}
+                Current CTC : {record.currentCTC} ::: Expected CTC :{" "}
+                {record.expectedCTC} ::: Notice Period : {record.noticePeriod}
               </p>
             ),
           }}

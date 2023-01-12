@@ -149,7 +149,15 @@ export const PostCandidate = () => {
       title: "Candidate ID",
       dataIndex: "candidateID",
       key: "candidateID",
-      render: (text) => <a>{text}</a>,
+      render: (text) => (
+        <a
+          style={{
+            marginLeft: "30px",
+          }}
+        >
+          {text}
+        </a>
+      ),
     },
     {
       title: "Candidate Name",
@@ -167,25 +175,11 @@ export const PostCandidate = () => {
       dataIndex: "candidateEmail",
       key: "candidateEmail",
     },
+    
     {
-      title: "Candidate Location",
-      dataIndex: "candidateLocation",
-      key: "candidateLocation",
-    },
-    {
-      title: "Current CTC",
-      dataIndex: "currentCTC",
-      key: "currentCTC",
-    },
-    {
-      title: "Expected CTC",
-      dataIndex: "expectedCTC",
-      key: "expectedCTC",
-    },
-    {
-      title: "Notice Period",
-      dataIndex: "noticePeriod",
-      key: "noticePeriod",
+      title: "Created By",
+      dataIndex: "createdBy",
+      key: "createdBy",
     },
     {
       title: "Primary Skills",
@@ -243,9 +237,10 @@ export const PostCandidate = () => {
     // },
   ];
 
-  const [selectedMatchingProfileRowKeys, setSelectedMatchingProfileRowKeys] = useState([]);
+  const [selectedMatchingProfileRowKeys, setSelectedMatchingProfileRowKeys] =
+    useState([]);
   const handleSelectChange = (newSelectedRowKeys) => {
-    console.log('selectedRowKeys changed: ', newSelectedRowKeys);
+    console.log("selectedRowKeys changed: ", newSelectedRowKeys);
     setSelectedMatchingProfileRowKeys(newSelectedRowKeys);
   };
   const matchingProfileRowSelection = {
@@ -416,7 +411,6 @@ export const PostCandidate = () => {
     });
   };
 
-
   const handlePanelChange = (key) => {
     console.log(key);
   };
@@ -569,17 +563,19 @@ export const PostCandidate = () => {
           <Collapse
             // defaultActiveKey={["1"]}
             onChange={handlePanelChange}
-            expandIcon={({ isActive }) => <PlusOutlined rotate={isActive ? 90 : 0} />}
+            expandIcon={({ isActive }) => (
+              <PlusOutlined rotate={isActive ? 90 : 0} />
+            )}
           >
-            <Panel header="Matching Profiles" style={{size: "16px"}} key="1">
-            <Table
-            columns={columns}
-            id="matchingCandidateListTable"
-            rowSelection={matchingProfileRowSelection}
-            rowKey={(record) => record.candidateEmail}
-            // style={{ fontSize: "24px" }}
-            dataSource={candidateList}
-          />
+            <Panel header="Matching Profiles" style={{ size: "16px" }} key="1">
+              <Table
+                columns={columns}
+                id="matchingCandidateListTable"
+                rowSelection={matchingProfileRowSelection}
+                rowKey={(record) => record.candidateEmail}
+                // style={{ fontSize: "24px" }}
+                dataSource={candidateList}
+              />
             </Panel>
           </Collapse>
 
@@ -1186,7 +1182,8 @@ export const PostCandidate = () => {
                     marginLeft: "50px",
                   }}
                 >
-                  {record.workLocation}
+                  Work Location : {record.workLocation} ::: Expected CTC :{" "}
+                  {record.expectedCTC} ::: Notice Period : {record.noticePeriod}
                 </p>
               ),
             }}
