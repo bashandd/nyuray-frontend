@@ -19,6 +19,7 @@ function SearchProfiles() {
       title: "Candidate ID",
       dataIndex: "candidateID",
       key: "candidateID",
+      render: (text) => <a>{text}</a>,
     },
     {
       title: "Candidate Name",
@@ -147,7 +148,7 @@ function SearchProfiles() {
         <Table
           columns={columns}
           id="candidateListTable"
-          rowKey="reqName"
+          rowKey="candidateName"
           style={{ fontSize: "24px" }}
           exportable
           exportableProps={{ showColumnPicker: true }}
@@ -159,7 +160,9 @@ function SearchProfiles() {
                   marginLeft: "50px",
                 }}
               >
-                {record.primarySkills}
+                Current CTC : {record.currentCTC} :::
+                Expected CTC : {record.expectedCTC} :::
+                Notice Period : {record.noticePeriod}
               </p>
             ),
           }}

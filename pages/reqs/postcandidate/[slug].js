@@ -149,14 +149,12 @@ export const PostCandidate = () => {
       title: "Candidate ID",
       dataIndex: "candidateID",
       key: "candidateID",
-
-      // render: (text) => <a>{text}</a>,
+      render: (text) => <a>{text}</a>,
     },
     {
       title: "Candidate Name",
       dataIndex: "candidateName",
       key: "candidateName",
-      // description: "candidateName",
       render: (text) => <a>{text}</a>,
     },
     {

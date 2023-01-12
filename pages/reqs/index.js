@@ -318,7 +318,11 @@ function Reqs() {
                 marginLeft: "50px",
               }}
             >
-              {record.jobDescription}
+              Client: {record.client} :::
+              No. Of Positions: {record.noOfPositions} :::
+              Expected CVs: {record.expectedCVs} :::
+              RGM SPOC:  {record.rgmSpoc}
+
             </p>
           ),
         }}
