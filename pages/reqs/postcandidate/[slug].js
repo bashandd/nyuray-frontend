@@ -146,9 +146,9 @@ export const PostCandidate = () => {
 
   const columns = [
     {
-      title: "Profile ID",
-      dataIndex: "profileID",
-      key: "profileID",
+      title: "Candidate ID",
+      dataIndex: "candidateID",
+      key: "candidateID",
 
       // render: (text) => <a>{text}</a>,
     },

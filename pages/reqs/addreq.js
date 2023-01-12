@@ -96,8 +96,8 @@ function NewReq() {
   const router = useRouter();
   const [form] = Form.useForm();
   const { Option } = Select;
-  const [ expRangeMin, setexpRangeMin ] = useState("0");
-  const [ expRangeMax, setexpRangeMax ] = useState("5");
+  const [ expRangeMin, setexpRangeMin ] = useState();
+  const [ expRangeMax, setexpRangeMax ] = useState();
 
 
   useEffect(() => {

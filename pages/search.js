@@ -16,6 +16,11 @@ import { MagnifyingGlass } from "react-loader-spinner";
 function SearchProfiles() {
   const columns = [
     {
+      title: "Candidate ID",
+      dataIndex: "candidateID",
+      key: "candidateID",
+    },
+    {
       title: "Candidate Name",
       dataIndex: "candidateName",
       key: "candidateName",
