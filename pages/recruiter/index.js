@@ -1,4 +1,4 @@
-import { Layout } from "antd";
+import { Row,Col, Button, Layout } from "antd";
 import MainLayout from "../../components/layout/MainLayout";
 const { Content, Sider } = Layout;
 

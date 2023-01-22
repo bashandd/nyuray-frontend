@@ -1,3 +1,4 @@
+import { Row,Col, Button, Layout } from "antd";
 import GuestLayout from "../../components/layout/GuestLayout";
 
 function Guest() {
