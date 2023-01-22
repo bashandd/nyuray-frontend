@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { Card, Col, Row, Layout, Tooltip } from "antd";
+import { Card, Row, Col, Button, Layout, Tooltip } from "antd";
 import {
   InfoCircleFilled,
   CaretUpFilled,
@@ -38,13 +38,12 @@ function Dashboard() {
   const [allProfiles, setAllProfiles] = useState([]);
   const [allOpenReqs, setAllOpenReqs] = useState([]);
 
-
   const getAllUsers = async () => {
     try {
       const { data } = await axios.get("/users");
       //console.log("All users", data);
       setAllUsers(data);
-     // console.log("all users length", allUsers.length);
+      // console.log("all users length", allUsers.length);
     } catch (e) {
       toast.error(e);
     }
@@ -53,9 +52,9 @@ function Dashboard() {
   const getAllProfiles = async () => {
     try {
       const { data } = await axios.get("/get-all-candidates");
-     // console.log("All Candidates", data);
+      // console.log("All Candidates", data);
       setAllProfiles(data);
-     // console.log("all candidates length", allProfiles.length);
+      // console.log("all candidates length", allProfiles.length);
     } catch (e) {
       toast.error(e);
     }
@@ -63,9 +62,9 @@ function Dashboard() {
   const getAllReqs = async () => {
     try {
       const { data } = await axios.get("/reqs");
-     // console.log("All Reqs", data);
+      // console.log("All Reqs", data);
       setAllOpenReqs(data);
-     // console.log("all reqs length", allOpenReqs.length);
+      // console.log("all reqs length", allOpenReqs.length);
     } catch (e) {
       toast.error(e);
     }
@@ -78,6 +77,15 @@ function Dashboard() {
   }, []);
   return (
     <>
+      {/* <Row justify="end" style={{ marginTop: "10px" }}>
+        <Col span={4}>
+          <Button type="primary">
+            <a href="javascript:history.back()">Go Back</a>
+          </Button>
+        </Col>
+      </Row> */}
+
+      
       <Row gutter={24} type="flex">
         {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Col {...topColResponsiveProps}>
@@ -156,7 +164,6 @@ function Dashboard() {
               twoToneColor="red"
               style={{
                 fontSize: "20px",
-               
               }}
             />
             total={allOpenReqs.length}
@@ -185,7 +192,6 @@ function Dashboard() {
               twoToneColor="#52c41a"
               style={{
                 fontSize: "20px",
-               
               }}
             />
             total={"TBD"}

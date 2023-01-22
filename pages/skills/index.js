@@ -11,14 +11,13 @@ import { convertLegacyProps } from "antd/lib/button/button";
 const { Content, Sider } = Layout;
 
 function Skills() {
-
   // // state
-   const [loading, setLoading] = useState(false);
-   const [skills, setSkills] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [skills, setSkills] = useState([]);
 
   // //updating state
-   const [updatingSkill, setUpdatingSkill] = useState({});
-   const [openModal, setOpenModal] = useState(false);
+  const [updatingSkill, setUpdatingSkill] = useState({});
+  const [openModal, setOpenModal] = useState(false);
 
   //hooks
   const [form] = Form.useForm();
@@ -55,16 +54,13 @@ function Skills() {
 
   const handleEdit = async (item) => {
     setUpdatingSkill(item);
-    console.log (" I am here :handleEdit ");
+    console.log(" I am here :handleEdit ");
     setOpenModal(true);
   };
 
   const handleUpdate = async (values) => {
     try {
-      const { data } = await axios.put(
-        `/skill/${updatingSkill.slug}`,
-        values
-      );
+      const { data } = await axios.put(`/skill/${updatingSkill.slug}`, values);
       if (data?.error) {
         toast.error(data.error);
       } else {
@@ -98,8 +94,14 @@ function Skills() {
   };
 
   return (
-
     <MainLayout>
+      <Row justify="end" style={{ marginTop: "10px" }}>
+        <Col span={4}>
+          <Button type="primary">
+            <a href="javascript:history.back()">Go Back</a>
+          </Button>
+        </Col>
+      </Row>
       <Row>
         {/* first column  screen size => xs=extra small sm-small, lg=large */}
 

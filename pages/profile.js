@@ -1,4 +1,4 @@
-import { Layout, Col, Card, Avatar } from "antd";
+import { Layout, Row, Col, Button, Card, Avatar, Divider } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import MainLayout from "../components/layout/MainLayout";
 
@@ -25,6 +25,14 @@ function Profile() {
   if (userInfo) {
     return (
       <MainLayout>
+        <Row justify="end" style={{ marginTop: "10px" }}>
+          <Col span={4}>
+            <Button type="primary">
+              <a href="javascript:history.back()">Go Back</a>
+            </Button>
+          </Col>
+        </Row>
+        <Divider></Divider>
         {/* <Col span={12}> */}
         <Avatar
           size={{

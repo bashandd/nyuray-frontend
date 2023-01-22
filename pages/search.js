@@ -9,7 +9,7 @@ import {
 } from "react";
 import { toast } from "react-hot-toast";
 import MainLayout from "../components/layout/MainLayout";
-import { Divider, Spin, Col } from "antd";
+import { Row, Divider, Button, Col } from "antd";
 import moment from "moment";
 import { MagnifyingGlass } from "react-loader-spinner";
 
@@ -131,6 +131,14 @@ function SearchProfiles() {
 
   return (
     <MainLayout>
+      <Row justify="end" style={{ marginTop: "10px" }}>
+        <Col span={4}>
+          <Button type="primary">
+            <a href="javascript:history.back()">Go Back</a>
+          </Button>
+        </Col>
+      </Row>
+
       <Divider
         orientationMargin="0"
         style={{

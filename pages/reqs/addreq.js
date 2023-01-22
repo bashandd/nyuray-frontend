@@ -96,9 +96,8 @@ function NewReq() {
   const router = useRouter();
   const [form] = Form.useForm();
   const { Option } = Select;
-  const [ expRangeMin, setexpRangeMin ] = useState();
-  const [ expRangeMax, setexpRangeMax ] = useState();
-
+  const [expRangeMin, setexpRangeMin] = useState();
+  const [expRangeMax, setexpRangeMax] = useState();
 
   useEffect(() => {
     localStorage.setItem("formValues", JSON.stringify(formValues));
@@ -138,11 +137,9 @@ function NewReq() {
     try {
       const { data } = await axios.get("/skills");
 
-
       if (data?.error) {
         toast.error(data.error);
       } else {
-
         setSkillItems(data);
       }
     } catch (e) {
@@ -152,14 +149,9 @@ function NewReq() {
 
   const onSkillChange = (event) => {
     setSkillName(event.target.value);
-   
-
-
   };
 
   const handleSkillChange = (value) => {
-   
-
     setInitialValues({
       ...initialValues,
       skills: value,
@@ -173,11 +165,9 @@ function NewReq() {
 
     try {
       const { data } = await axios.post("/skill", { name: skillName });
-    
+
       skillItems.push(data.name);
       getSkills();
-
-
     } catch (e) {
       console.log("Error", e);
     }
@@ -187,8 +177,7 @@ function NewReq() {
     }, 0);
   };
 
-
- const onExpRangeChange = value => {
+  const onExpRangeChange = (value) => {
     if (value[0] < value[1]) {
       setexpRangeMin(value[0]);
       setexpRangeMax(value[1]);
@@ -197,30 +186,39 @@ function NewReq() {
         expRangeMin: expRangeMin,
         expRangeMax: expRangeMax,
       });
-      console.log ("Exp RangeMin: "+ expRangeMin +"Exp RangeMax: " + expRangeMax);
-     // this.setState({ expRangeMin: value[0], expRangeMax: value[1] });
+      console.log(
+        "Exp RangeMin: " + expRangeMin + "Exp RangeMax: " + expRangeMax
+      );
+      // this.setState({ expRangeMin: value[0], expRangeMax: value[1] });
     }
   };
 
-  const onExpRangeChangeMin = value => {
+  const onExpRangeChangeMin = (value) => {
     if (expRangeMax > value) {
-     // this.setState({ expRangeMin: value });
+      // this.setState({ expRangeMin: value });
       setexpRangeMin(value);
     }
   };
-  const onExpRangeChangeMax = value => {
+  const onExpRangeChangeMax = (value) => {
     if (expRangeMin < value) {
-    //  this.setState({ expRangeMax: value });
-    setexpRangeMax(value);
+      //  this.setState({ expRangeMax: value });
+      setexpRangeMax(value);
     }
   };
 
-  const onExpRangeAfterChange = value => {
+  const onExpRangeAfterChange = (value) => {
     console.log("onAfterChange: ", value);
   };
 
   return (
     <MainLayout>
+      <Row justify="end" style={{ marginTop: "10px" }}>
+        <Col span={4}>
+          <Button type="primary">
+            <a href="javascript:history.back()">Go Back</a>
+          </Button>
+        </Col>
+      </Row>
       <Form
         {...formItemLayout}
         form={form}
@@ -475,46 +473,45 @@ function NewReq() {
               //   },
               // ]}
             >
-        <Slider
-          className="slider-main-div"
-          min={0}
-          max={30}
-          onChange={onExpRangeChange}
-          range={true}
-          defaultValue={[expRangeMin, expRangeMax]}
-          value={[expRangeMin, expRangeMax]}
-        />
-        <div className="range-input-number-main">
-      
-          <InputNumber
-            className="min-input-main"
-            expRangeMin={0}
-            expRangeMax={30}
-            value={expRangeMin}
-          //  onChange={onExpRangeChangeMin}
-          onChange={(e) => {
-                  setInitialValues({
-                    ...initialValues,
-                    expRangeMin: e.target.value,
-                  });
-                }}
-          />
- 
-          <span className="range-span"> to </span>
-          <InputNumber
-            className="min-input-main"
-            expRangeMin={0}
-            expRangeMax={30}
-            value={expRangeMax}
-           // onChange={onExpRangeChangeMax}
-            onChange={(e) => {
-                  setInitialValues({
-                    ...initialValues,
-                    expRangeMax: e.target.value,
-                  });
-                }}
-          />
-        </div>
+              <Slider
+                className="slider-main-div"
+                min={0}
+                max={30}
+                onChange={onExpRangeChange}
+                range={true}
+                defaultValue={[expRangeMin, expRangeMax]}
+                value={[expRangeMin, expRangeMax]}
+              />
+              <div className="range-input-number-main">
+                <InputNumber
+                  className="min-input-main"
+                  expRangeMin={0}
+                  expRangeMax={30}
+                  value={expRangeMin}
+                  //  onChange={onExpRangeChangeMin}
+                  onChange={(e) => {
+                    setInitialValues({
+                      ...initialValues,
+                      expRangeMin: e.target.value,
+                    });
+                  }}
+                />
+
+                <span className="range-span"> to </span>
+                <InputNumber
+                  className="min-input-main"
+                  expRangeMin={0}
+                  expRangeMax={30}
+                  value={expRangeMax}
+                  // onChange={onExpRangeChangeMax}
+                  onChange={(e) => {
+                    setInitialValues({
+                      ...initialValues,
+                      expRangeMax: e.target.value,
+                    });
+                  }}
+                />
+              </div>
 
               {/* <InputNumber
                 value={initialValues.expRange}

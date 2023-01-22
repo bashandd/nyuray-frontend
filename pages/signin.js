@@ -65,7 +65,7 @@ function Signin() {
   };
 
   return (
-    <div style={{ backgroundColor: "whitesmoke" }}>
+    <div  style={{ backgroundColor: "whitesmoke" }}>
       <Row>
         <Col span={8} offset={8}>
           <h1 style={{ paddingTop: "100px", size: "20px" }}></h1>
@@ -80,13 +80,13 @@ function Signin() {
             <Meta
               avatar=<LoginOutlined />
               title="Sign In"
-              style={{ marginLeft: "150px", fontSize: "20px",  }}
+              style={{ marginLeft: "150px", fontSize: "20px" }}
             />
             <br></br>
             <Form
               // form={form}
+
               name="normal_login"
-              className="login-form"
               initialValues={{
                 remember: true,
                 // email: "admin@nyuray.com",
@@ -116,7 +116,7 @@ function Signin() {
               </Form.Item>
 
               <Link href="/forgot-password">
-                <a style = {{marginLeft: "150px"}}>Forgot Password</a>
+                <a style={{ marginLeft: "150px" }}>Forgot Password</a>
               </Link>
               <br />
               <br />
@@ -126,14 +126,14 @@ function Signin() {
                   type="primary"
                   htmlType="submit"
                   className="login-form-button"
-                  style = {{marginLeft: "170px"}}
+                  style={{ marginLeft: "170px" }}
                 >
                   Login
                 </Button>
                 <br />
-                <p style={{ marginLeft: "200px"  }}> Or </p>
+                <p style={{ marginLeft: "200px" }}> Or </p>
                 <Link href="/signup">
-                  <a style = {{marginLeft: "160px"}}>Register now!</a>
+                  <a style={{ marginLeft: "160px" }}>Register now!</a>
                 </Link>
               </Form.Item>
             </Form>

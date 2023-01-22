@@ -20,7 +20,6 @@ import { useRef } from "react";
 import { toast } from "react-hot-toast";
 import { PlusOutlined } from "@ant-design/icons";
 
-
 const { Option } = Select;
 const { Content, Sider } = Layout;
 const { TextArea } = Input;
@@ -69,20 +68,20 @@ function NewClient() {
   const [theme, setTheme] = useContext(ThemeContext);
   // state
   const [initialValues, setInitialValues] = useState({
-    clientName:"",
+    clientName: "",
     clientFax: "",
-    clientPhone:"",
-    accountName:"",
-    clientEmail:"",
-    expiryDate:"",
-    accountManager:"",
+    clientPhone: "",
+    accountName: "",
+    clientEmail: "",
+    expiryDate: "",
+    accountManager: "",
     BDM: "",
-    billingAddress:"",
-    billingPO:"",
-    billingCity:"",
-    billingState:"",
-    billingCountry:"",
-    billingCode:"",
+    billingAddress: "",
+    billingPO: "",
+    billingCity: "",
+    billingState: "",
+    billingCountry: "",
+    billingCode: "",
     // clientDescription:"",
     // otherEmail:"",
     // sicCode:"",
@@ -91,7 +90,6 @@ function NewClient() {
     // ownership:"",
     // industry:"",
     // parentCompany:"",
-
   });
   const [formValues, setFormValues] = useState([]);
   const [clientList, setClientList] = useState([]);
@@ -113,10 +111,8 @@ function NewClient() {
     try {
       setLoading(true);
 
-
       setFormValues(initialValues);
 
-  
       const { data } = await axios.post("/create-client", {
         formValues: initialValues,
       });
@@ -137,20 +133,17 @@ function NewClient() {
 
   useEffect(() => {
     getClients();
-   // getAllUsers();
+    // getAllUsers();
   }, []);
 
   const getClients = async () => {
     try {
       const { data } = await axios.get("/clients");
 
-
       if (data?.error) {
         toast.error(data.error);
       } else {
-    
         setClientList(data);
- 
       }
     } catch (e) {
       toast.error(e);
@@ -162,29 +155,29 @@ function NewClient() {
     try {
       const { data } = await axios.get("/allUsers");
 
-
       if (data?.error) {
         toast.error(data.error);
       } else {
-   
         setAllUsers(data);
-
       }
     } catch (e) {
       toast.error(e);
     }
   };
 
-
-
   const handleCancel = () => {
     console.log("I am in handleCancel");
   };
 
-
-
   return (
     <MainLayout>
+      <Row justify="end" style={{ marginTop: "10px" }}>
+        <Col span={4}>
+          <Button type="primary">
+            <a href="javascript:history.back()">Go Back</a>
+          </Button>
+        </Col>
+      </Row>
       <Form
         {...formItemLayout}
         form={form}
@@ -387,11 +380,7 @@ function NewClient() {
             </Form.Item>
           </Col>
           <Col span={8}>
-            <Form.Item
-              name="BDM"
-              label="BDM"
-              style={{ fontSize: "18px" }}
-            >
+            <Form.Item name="BDM" label="BDM" style={{ fontSize: "18px" }}>
               <Input
                 value={initialValues.BDM}
                 onChange={(e) => {
@@ -693,27 +682,23 @@ function NewClient() {
           </Col>
         </Row> */}
         <Row>
-        <Col span={8}>
-         
-         </Col>
-        
-          
+          <Col span={8}></Col>
+
           <Row>
-          <Space>
-            <Form.Item {...tailFormItemLayout}>
-              <Button
-                size="large"
-                type="primary"
-                htmlType="submit"
-                shape="round"
-                loading={loading}
-              >
-                Submit
-              </Button>
-            </Form.Item>
-         
-      
-            {/* <Form.Item {...tailFormItemLayout}>
+            <Space>
+              <Form.Item {...tailFormItemLayout}>
+                <Button
+                  size="large"
+                  type="primary"
+                  htmlType="submit"
+                  shape="round"
+                  loading={loading}
+                >
+                  Submit
+                </Button>
+              </Form.Item>
+
+              {/* <Form.Item {...tailFormItemLayout}>
               <Button
                 size="large"
                 type="primary"
@@ -726,13 +711,9 @@ function NewClient() {
               </Button>
             </Form.Item> */}
             </Space>
-            </Row>
-         
-        
-          <Col span={8}>
-         
-         </Col>
-       
+          </Row>
+
+          <Col span={8}></Col>
         </Row>
       </Form>
     </MainLayout>

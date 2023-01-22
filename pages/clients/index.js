@@ -78,44 +78,37 @@ function Clients() {
   };
 
   const handleEdit = async (client) => {
-  
     return router.push(`/clients/${client.slug}`);
   };
   const handleClone = async (client) => {
-   
     const answer = window.confirm("Are you sure you want to Clone?");
     if (!answer) return;
-      try {
-        setLoading(true);
-        //reset clientName and accountName as these are unique fields in DB
-        client._id=null;
-       client.clientName = client.clientName+"-Copy";
-       client.accountName = client.accountName+"-Copy";
-       
-        const { data } = await axios.post("/create-client", {
-          formValues: client,
-          
-        });
-        if (data?.error) {
-          toast.error(data?.error);
-          setLoading(false);
-          
-        } else {
-          toast.success("Client Cloned successfully");
-          fetchClients();
-          router.push("/clients");
-        }
-      } catch (err) {
-        console.log(err);
-        toast.error("Client cloning failed. Try again." + err);
-        setLoading(false);
-       
-      }
-    };
+    try {
+      setLoading(true);
+      //reset clientName and accountName as these are unique fields in DB
+      client._id = null;
+      client.clientName = client.clientName + "-Copy";
+      client.accountName = client.accountName + "-Copy";
 
+      const { data } = await axios.post("/create-client", {
+        formValues: client,
+      });
+      if (data?.error) {
+        toast.error(data?.error);
+        setLoading(false);
+      } else {
+        toast.success("Client Cloned successfully");
+        fetchClients();
+        router.push("/clients");
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error("Client cloning failed. Try again." + err);
+      setLoading(false);
+    }
+  };
 
   const handleDelete = async (client) => {
-
     try {
       const answer = window.confirm("Are you sure you want to delete?");
       if (!answer) return;
@@ -123,7 +116,6 @@ function Clients() {
       if (data?.error) {
         toast.error("Client Delete Failed: " + data.error);
       } else {
-  
         setClient((prev) => ({
           ...prev,
           clients: prev.clients.filter((p) => p._id !== client._id),
@@ -136,6 +128,7 @@ function Clients() {
 
   return (
     <MainLayout>
+   
       <Row justify="end" style={{ marginTop: "10px" }}>
         <Col span={4}>
           <Button type="primary">
@@ -144,6 +137,11 @@ function Clients() {
                 <PlusOutlined /> Add New Client
               </a>
             </Link>
+          </Button>
+        </Col>
+        <Col span={4}>
+          <Button type="primary">
+            <a href="javascript:history.back()">Go Back</a>
           </Button>
         </Col>
       </Row>
@@ -176,7 +174,6 @@ export async function getServerSideProps() {
     props: {
       clients: data,
     },
-    
   };
 }
 

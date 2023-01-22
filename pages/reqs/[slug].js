@@ -31,8 +31,6 @@ const { Option } = Select;
 const { Content, Sider } = Layout;
 const { TextArea } = Input;
 
-
-
 let index = 0;
 
 const formItemLayout = {
@@ -73,8 +71,6 @@ const tailFormItemLayout = {
 function EditReq() {
   // load from local storage
 
-
-
   // context
   const [theme, setTheme] = useContext(ThemeContext);
   // state
@@ -96,8 +92,6 @@ function EditReq() {
 
   const [formValues, setFormValues] = useState([]);
 
-
-
   const [loading, setLoading] = useState(false);
   const [reqId, setReqId] = useState("");
 
@@ -107,14 +101,10 @@ function EditReq() {
   const formRef = useRef(null);
   const [formDisabled, setFormDisabled] = useState(false);
 
-
-
   // hook
   const router = useRouter();
   const [form, reset] = Form.useForm();
   const { Option } = Select;
-
-
 
   const loadRequirement = async (data) => {
     try {
@@ -127,7 +117,7 @@ function EditReq() {
         setLoading(true);
         initialValues = data;
         setReqId(data._id);
-        console.log ("reqID,", reqId);
+        console.log("reqID,", reqId);
         setInitialValues(initialValues);
       }
     } catch (e) {}
@@ -137,25 +127,17 @@ function EditReq() {
     loadRequirement();
   }, [router?.query?.slug]);
 
-
-
   useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-
-    }, 3000);
+    const delayDebounceFn = setTimeout(() => {}, 3000);
     setLoading(false);
     // Cleanup fn
     return () => clearTimeout(delayDebounceFn);
   }, [initialValues]);
 
-
-
   const onReset = () => {
     form.resetFields();
   };
-  const handleonValuesChange = async () => {
-
-  };
+  const handleonValuesChange = async () => {};
 
   const handleSubmit = async () => {
     try {
@@ -185,7 +167,9 @@ function EditReq() {
 
   useEffect(() => {
     getSkills();
-    if (router.query.view) { setFormDisabled (true);}
+    if (router.query.view) {
+      setFormDisabled(true);
+    }
     console.log("FormDisabled", formDisabled);
   }, []);
 
@@ -241,9 +225,17 @@ function EditReq() {
     }, 0);
   };
 
-  console.log ("....", router.query.view);
+  console.log("....", router.query.view);
   return (
     <MainLayout>
+      <Row justify="end" style={{ marginTop: "10px" }}>
+        <Col span={4}>
+          <Button type="primary">
+            <a href="javascript:history.back()">Go Back</a>
+          </Button>
+        </Col>
+      </Row>
+
       {loading ? (
         <div> Loading ...</div>
       ) : (
@@ -251,13 +243,12 @@ function EditReq() {
           ref={formRef}
           {...formItemLayout}
           form={form}
-          disabled = {formDisabled}
+          disabled={formDisabled}
           // disabled = {router.query.view}
 
           layout="horizontal"
           name="addRequirementForm"
           onFinish={handleSubmit}
-
           scrollToFirstError
         >
           <Divider
@@ -271,7 +262,6 @@ function EditReq() {
           <Row>
             <Col span={8} offset={1}>
               <Form.Item
-       
                 label="Req Name"
                 style={{ fontSize: "18px" }}
                 tooltip="Enter the requirement name"
@@ -299,7 +289,6 @@ function EditReq() {
 
             <Col span={8} offset={4}>
               <Form.Item
-              
                 label="Closing Date"
                 style={{ fontSize: "18px" }}
                 rules={[
@@ -310,8 +299,8 @@ function EditReq() {
                 ]}
               >
                 <DatePicker
-                 format='DD-MM-YYYY' 
-                  value={moment(initialValues.closingDate,'DD-MM-YYYY')}
+                  format="DD-MM-YYYY"
+                  value={moment(initialValues.closingDate, "DD-MM-YYYY")}
                   style={{ fontSize: "18px" }}
                   onChange={(date, dateString) => {
                     setInitialValues({
@@ -335,314 +324,303 @@ function EditReq() {
             Client Information
           </Divider>
           <Row>
-          <Col span={8} offset={1}>
-            <Form.Item
-           
-              label="Skills"
-              style={{ fontSize: "18px" }}
-              rules={[
-                {
-                  required: true,
-                  message: "Please input Skills",
-                },
-              ]}
-            >
-              <Select
-                mode="multiple"
+            <Col span={8} offset={1}>
+              <Form.Item
+                label="Skills"
                 style={{ fontSize: "18px" }}
-                placeholder="Select Skills"
-                defaultValue = {initialValues.skills}
-                onChange={(values) => {
-                  handleSkillChange(values);
-                }}
-                dropdownRender={(menu) => (
-                  <>
-                    {menu}
-                    <Divider
-                      style={{
-                        margin: "8px 0",
-                      }}
-                    />
-                    <Space
-                      style={{
-                        padding: "0 8px 4px",
-                      }}
-                    >
-                      <Input
-                        placeholder="Please enter item"
-                        ref={inputRef}
-                        value={skillName}
-                        onChange={onSkillChange}
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input Skills",
+                  },
+                ]}
+              >
+                <Select
+                  mode="multiple"
+                  style={{ fontSize: "18px" }}
+                  placeholder="Select Skills"
+                  defaultValue={initialValues.skills}
+                  onChange={(values) => {
+                    handleSkillChange(values);
+                  }}
+                  dropdownRender={(menu) => (
+                    <>
+                      {menu}
+                      <Divider
+                        style={{
+                          margin: "8px 0",
+                        }}
                       />
-                      <Button
-                        type="text"
-                        icon={<PlusOutlined />}
-                        onClick={addSkill}
+                      <Space
+                        style={{
+                          padding: "0 8px 4px",
+                        }}
                       >
-                        Add Skill
-                      </Button>
-                    </Space>
-                  </>
-                )}
-              >
-                {skillItems.map((item) => (
-                  <Option key={item.name}>{item.name}</Option>
-                ))}
-              </Select>
-            </Form.Item>
+                        <Input
+                          placeholder="Please enter item"
+                          ref={inputRef}
+                          value={skillName}
+                          onChange={onSkillChange}
+                        />
+                        <Button
+                          type="text"
+                          icon={<PlusOutlined />}
+                          onClick={addSkill}
+                        >
+                          Add Skill
+                        </Button>
+                      </Space>
+                    </>
+                  )}
+                >
+                  {skillItems.map((item) => (
+                    <Option key={item.name}>{item.name}</Option>
+                  ))}
+                </Select>
+              </Form.Item>
 
-            <Form.Item
-          
-              label="No.Of Positions"
-              style={{ fontSize: "18px" }}
-              rules={[
-                {
-                  required: true,
-                  message: "Please input Number of Positions",
-                },
-              ]}
-            >
-              <InputNumber
-                value={initialValues.noOfPositions}
-                placeholder="No. Of Positions"
-                onChange={(value) => {
-                  setInitialValues({
-                    ...initialValues,
-                    noOfPositions: value,
-                  });
-                }}
-              />
-            </Form.Item>
-            <Form.Item
-        
-              label="Max CTC"
-              style={{ fontSize: "18px" }}
-              rules={[
-                {
-                  required: true,
-                  message: "Please input max CTC",
-                },
-              ]}
-            >
-              <InputNumber
-                value={initialValues.maxCtc}
-                step="1000"
+              <Form.Item
+                label="No.Of Positions"
                 style={{ fontSize: "18px" }}
-                placeholder="Max CTC"
-                onChange={(value) => {
-                  setInitialValues({
-                    ...initialValues,
-                    maxCtc: value,
-                  });
-                }}
-              />
-            </Form.Item>
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input Number of Positions",
+                  },
+                ]}
+              >
+                <InputNumber
+                  value={initialValues.noOfPositions}
+                  placeholder="No. Of Positions"
+                  onChange={(value) => {
+                    setInitialValues({
+                      ...initialValues,
+                      noOfPositions: value,
+                    });
+                  }}
+                />
+              </Form.Item>
+              <Form.Item
+                label="Max CTC"
+                style={{ fontSize: "18px" }}
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input max CTC",
+                  },
+                ]}
+              >
+                <InputNumber
+                  value={initialValues.maxCtc}
+                  step="1000"
+                  style={{ fontSize: "18px" }}
+                  placeholder="Max CTC"
+                  onChange={(value) => {
+                    setInitialValues({
+                      ...initialValues,
+                      maxCtc: value,
+                    });
+                  }}
+                />
+              </Form.Item>
 
-            <Form.Item
-             
-              label="Req Type"
-              style={{ fontSize: "18px" }}
-              rules={[
-                {
-                  required: true,
-                  message: "Please Select Req Type",
-                  whitespace: true,
-                },
-              ]}
-            >
-              <Select
-                placeholder="Req Type"
+              <Form.Item
+                label="Req Type"
                 style={{ fontSize: "18px" }}
-                value={initialValues.reqType}
-                onChange={(value, string) => {
-                  setInitialValues({
-                    ...initialValues,
-                    reqType: value,
-                  });
-                }}
+                rules={[
+                  {
+                    required: true,
+                    message: "Please Select Req Type",
+                    whitespace: true,
+                  },
+                ]}
               >
-                <Option value="Contractual"></Option>
-                <Option value="Direct Hire"></Option>
-              </Select>
-            </Form.Item>
-            <Form.Item
-          
-              label="Location"
-              style={{ fontSize: "18px" }}
-              rules={[
-                {
-                  required: true,
-                  message: "Please Select Location",
-                  whitespace: true,
-                },
-              ]}
-            >
-              <Select
-                value={initialValues.reqLocation}
-                placeholder="Job Location"
+                <Select
+                  placeholder="Req Type"
+                  style={{ fontSize: "18px" }}
+                  value={initialValues.reqType}
+                  onChange={(value, string) => {
+                    setInitialValues({
+                      ...initialValues,
+                      reqType: value,
+                    });
+                  }}
+                >
+                  <Option value="Contractual"></Option>
+                  <Option value="Direct Hire"></Option>
+                </Select>
+              </Form.Item>
+              <Form.Item
+                label="Location"
                 style={{ fontSize: "18px" }}
-                onChange={(value, string) => {
-                  setInitialValues({
-                    ...initialValues,
-                    reqLocation: value,
-                  });
-                }}
+                rules={[
+                  {
+                    required: true,
+                    message: "Please Select Location",
+                    whitespace: true,
+                  },
+                ]}
               >
-                <Option value="Hyderabad"></Option>
-                <Option value="Bangalore"></Option>
-                <Option value="Chennai"></Option>
-                <Option value="Noida"></Option>
-                <Option value="Gurgaon"></Option>
-                <Option value="Delhi"></Option>
-              </Select>
-            </Form.Item>
-          </Col>
-          <Col span={8} offset={4}>
-            <Form.Item
-         
-              label="Exp Range"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input Experience Range",
-                },
-              ]}
-            >
-              <InputNumber
-                value={initialValues.expRange}
-                placeholder="Exp Range"
-                onChange={(value) => {
-                  setInitialValues({
-                    ...initialValues,
-                    expRange: value,
-                  });
-                }}
-              />
-            </Form.Item>
-            <Form.Item
-          
-              label="Job Code"
-              style={{ fontSize: "18px" }}
-              rules={[
-                {
-                  required: true,
-                  message: "Please input Job Code",
-                  whitespace: true,
-                },
-              ]}
-            >
-              <Input
-                value={initialValues.jobCode}
-                placeholder="Job Code"
-                onChange={(e) => {
-                  setInitialValues({
-                    ...initialValues,
-                    jobCode: e.target.value,
-                  });
-                }}
-              />
-            </Form.Item>
-            <Form.Item
-           
-              label="Job Description"
-              style={{ fontSize: "18px" }}
-              rules={[
-                {
-                  required: true,
-                  message: "Please enter Job Description",
-                },
-              ]}
-            >
-              <TextArea
-                rows={4}
-                value={initialValues.jobDescription}
-                placeholder="Job Description"
-                onChange={(e) => {
-                  setInitialValues({
-                    ...initialValues,
-                    jobDescription: e.target.value,
-                  });
-                }}
-              />
-            </Form.Item>
-            <Form.Item
-           
-              label="Expected CVs"
-              style={{ fontSize: "18px" }}
-              rules={[
-                {
-                  required: true,
-                  message: "Please enter expected CVs",
-                },
-              ]}
-            >
-              <InputNumber
-                value={initialValues.expectedCVs}
-                placeholder="Expected CVs"
-                onChange={(value) => {
-                  setInitialValues({
-                    ...initialValues,
-                    expectedCVs: value,
-                  });
-                }}
-              />
-            </Form.Item>
-            <Form.Item
-             
-              label="Client"
-              style={{ fontSize: "18px" }}
-              rules={[
-                {
-                  required: true,
-                  message: "Please Select Location",
-                  whitespace: true,
-                },
-              ]}
-            >
-              <Select
-                placeholder="Client"
+                <Select
+                  value={initialValues.reqLocation}
+                  placeholder="Job Location"
+                  style={{ fontSize: "18px" }}
+                  onChange={(value, string) => {
+                    setInitialValues({
+                      ...initialValues,
+                      reqLocation: value,
+                    });
+                  }}
+                >
+                  <Option value="Hyderabad"></Option>
+                  <Option value="Bangalore"></Option>
+                  <Option value="Chennai"></Option>
+                  <Option value="Noida"></Option>
+                  <Option value="Gurgaon"></Option>
+                  <Option value="Delhi"></Option>
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={8} offset={4}>
+              <Form.Item
+                label="Exp Range"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input Experience Range",
+                  },
+                ]}
+              >
+                <InputNumber
+                  value={initialValues.expRange}
+                  placeholder="Exp Range"
+                  onChange={(value) => {
+                    setInitialValues({
+                      ...initialValues,
+                      expRange: value,
+                    });
+                  }}
+                />
+              </Form.Item>
+              <Form.Item
+                label="Job Code"
                 style={{ fontSize: "18px" }}
-                value={initialValues.client}
-                onChange={(value, string) => {
-                  setInitialValues({
-                    ...initialValues,
-                    client: value,
-                  });
-                }}
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input Job Code",
+                    whitespace: true,
+                  },
+                ]}
               >
-                <Option value="TCS"></Option>
-                <Option value="Wipro"></Option>
-                <Option value="CGL"></Option>
-                <Option value="DELL"></Option>
-              </Select>
-            </Form.Item>
+                <Input
+                  value={initialValues.jobCode}
+                  placeholder="Job Code"
+                  onChange={(e) => {
+                    setInitialValues({
+                      ...initialValues,
+                      jobCode: e.target.value,
+                    });
+                  }}
+                />
+              </Form.Item>
+              <Form.Item
+                label="Job Description"
+                style={{ fontSize: "18px" }}
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter Job Description",
+                  },
+                ]}
+              >
+                <TextArea
+                  rows={4}
+                  value={initialValues.jobDescription}
+                  placeholder="Job Description"
+                  onChange={(e) => {
+                    setInitialValues({
+                      ...initialValues,
+                      jobDescription: e.target.value,
+                    });
+                  }}
+                />
+              </Form.Item>
+              <Form.Item
+                label="Expected CVs"
+                style={{ fontSize: "18px" }}
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter expected CVs",
+                  },
+                ]}
+              >
+                <InputNumber
+                  value={initialValues.expectedCVs}
+                  placeholder="Expected CVs"
+                  onChange={(value) => {
+                    setInitialValues({
+                      ...initialValues,
+                      expectedCVs: value,
+                    });
+                  }}
+                />
+              </Form.Item>
+              <Form.Item
+                label="Client"
+                style={{ fontSize: "18px" }}
+                rules={[
+                  {
+                    required: true,
+                    message: "Please Select Location",
+                    whitespace: true,
+                  },
+                ]}
+              >
+                <Select
+                  placeholder="Client"
+                  style={{ fontSize: "18px" }}
+                  value={initialValues.client}
+                  onChange={(value, string) => {
+                    setInitialValues({
+                      ...initialValues,
+                      client: value,
+                    });
+                  }}
+                >
+                  <Option value="TCS"></Option>
+                  <Option value="Wipro"></Option>
+                  <Option value="CGL"></Option>
+                  <Option value="DELL"></Option>
+                </Select>
+              </Form.Item>
 
-            <Form.Item
-         
-              label="RGM SPOC"
-              value={initialValues.rgmSpoc}
-              style={{ fontSize: "18px" }}
-              rules={[
-                {
-                  required: true,
-                  message: "Please enter RGM SPOC",
-                  whitespace: true,
-                },
-              ]}
-            >
-              <Input
+              <Form.Item
+                label="RGM SPOC"
                 value={initialValues.rgmSpoc}
-                placeholder="RGM Spoc"
-                onChange={(e) => {
-                  setInitialValues({
-                    ...initialValues,
-                    rgmSpoc: e.target.value,
-                  });
-                }}
-              />
-            </Form.Item>
-          </Col>
-        </Row>
+                style={{ fontSize: "18px" }}
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter RGM SPOC",
+                    whitespace: true,
+                  },
+                ]}
+              >
+                <Input
+                  value={initialValues.rgmSpoc}
+                  placeholder="RGM Spoc"
+                  onChange={(e) => {
+                    setInitialValues({
+                      ...initialValues,
+                      rgmSpoc: e.target.value,
+                    });
+                  }}
+                />
+              </Form.Item>
+            </Col>
+          </Row>
           <Form.Item {...tailFormItemLayout}>
             <Button
               size="large"

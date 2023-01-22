@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { Layout } from "antd";
 import MainLayout from "../../components/layout/MainLayout";
-import { Form, Input, Row, Col, Button, List } from "antd";
+import { Form, Input, Row, Col, Button, List, Divider } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
 const { Content, Sider } = Layout;
 
-function Vendors() {
+function Vendors(navigation) {
   // state
   const [loading, setLoading] = useState(false);
   const [vendors, setVendors] = useState([]);
@@ -71,6 +71,14 @@ function Vendors() {
 
   return (
     <MainLayout>
+      <Row justify="end" style={{ marginTop: "10px" }}>
+        <Col span={4}>
+          <Button type="primary">
+            <a href="javascript:history.back()">Go Back</a>
+          </Button>
+        </Col>
+      </Row>
+<Divider></Divider>
       <Row>
         {/* first column  screen size => xs=extra small sm-small, lg=large */}
 

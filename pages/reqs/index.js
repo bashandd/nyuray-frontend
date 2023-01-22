@@ -20,14 +20,12 @@ function Reqs() {
   const [loading, setLoading] = useState(false);
   const [auth, setAuth] = useContext(AuthContext);
 
-
   const { reqs } = req;
   // hook
   const router = useRouter();
 
   let currentUserRole = "";
   let isAllowed = false;
-
 
   const columns = [
     {
@@ -43,9 +41,8 @@ function Reqs() {
       description: "jobDescription",
       // render: (text) => <a>{text}</a>,
       render: (_, record) => (
-     
-           <a onClick={() => handleView(record)}>{record.reqName}</a>
-         //  <a onClick={() => router.push(`/reqs/${record.slug}`)}>{record.reqName}</a>
+        <a onClick={() => handleView(record)}>{record.reqName}</a>
+        //  <a onClick={() => router.push(`/reqs/${record.slug}`)}>{record.reqName}</a>
       ),
     },
     {
@@ -145,7 +142,6 @@ function Reqs() {
           ...prev,
           reqs: filteredData,
         }));
-
       }
       setLoading(false);
     } catch (err) {
@@ -168,18 +164,21 @@ function Reqs() {
   };
 
   const handleView = async (req) => {
-   
-    return router.push({pathname: `/reqs/${req.slug}`,   query: { view: true }});
+    return router.push({
+      pathname: `/reqs/${req.slug}`,
+      query: { view: true },
+    });
   };
   const handleEdit = async (req) => {
-   
-    return router.push({pathname: `/reqs/${req.slug}`,   query: { view: false }});
+    return router.push({
+      pathname: `/reqs/${req.slug}`,
+      query: { view: false },
+    });
   };
-  
+
   // const handleSingleReq = async (req) => {
   //   return router.push(`/reqs/${req.slug}`);
   // };
-
 
   const handlePost = async (req) => {
     return router.push(`/reqs/postcandidate/${req.slug}`);
@@ -284,6 +283,7 @@ function Reqs() {
 
   return (
     <MainLayout>
+
       <Row justify="end" style={{ marginTop: "10px" }}>
         <Col span={4}>
           {isAllowed && (
@@ -296,6 +296,11 @@ function Reqs() {
             </Button>
           )}
         </Col>
+        <Col span={4}>
+          <Button type="primary">
+            <a href="javascript:history.back()">Go Back</a>
+          </Button>
+        </Col>
       </Row>
 
       <Divider orientation="left" style={{ fontSize: "24px" }}>
@@ -306,28 +311,25 @@ function Reqs() {
           <Spin size="large" />
         </Col>
       ) : (
-
-      <Table
-        columns={columns}
-        rowKey="reqName"
-        style={{ fontSize: "24px" }}
-        expandable={{
-          expandedRowRender: (record) => (
-            <p
-              style={{
-                marginLeft: "50px",
-              }}
-            >
-              Client: {record.client} :::
-              No. Of Positions: {record.noOfPositions} :::
-              Expected CVs: {record.expectedCVs} :::
-              RGM SPOC:  {record.rgmSpoc}
-
-            </p>
-          ),
-        }}
-        dataSource={reqs}
-      />
+        <Table
+          columns={columns}
+          rowKey="reqName"
+          style={{ fontSize: "24px" }}
+          expandable={{
+            expandedRowRender: (record) => (
+              <p
+                style={{
+                  marginLeft: "50px",
+                }}
+              >
+                Client: {record.client} ::: No. Of Positions:{" "}
+                {record.noOfPositions} ::: Expected CVs: {record.expectedCVs}{" "}
+                ::: RGM SPOC: {record.rgmSpoc}
+              </p>
+            ),
+          }}
+          dataSource={reqs}
+        />
       )}
 
       <ReqAssignmentModal

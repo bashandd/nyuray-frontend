@@ -15,6 +15,7 @@ import {
   Table,
   Space,
   Tag,
+  Divider,
 } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import axios from "axios";
@@ -138,7 +139,9 @@ function Users() {
 
   const handleUpdate = async (values) => {
     console.log(" I am in handleUpdate", values);
-    const answer = window.confirm("Are you sure you want to update User details?");
+    const answer = window.confirm(
+      "Are you sure you want to update User details?"
+    );
     if (!answer) return;
 
     setLoading(true);
@@ -173,6 +176,14 @@ function Users() {
 
   return (
     <MainLayout>
+      <Row justify="end" style={{ marginTop: "10px" }}>
+        <Col span={4}>
+          <Button type="primary">
+            <a href="javascript:history.back()">Go Back</a>
+          </Button>
+        </Col>
+      </Row>
+      <Divider></Divider>
       <Table
         columns={columns}
         rowKey="name"
